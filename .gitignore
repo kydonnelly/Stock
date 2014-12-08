@@ -18,6 +18,8 @@ DerivedData
 *.xcuserstate
 .DS_Store
 xcuserdata/
+project.xcworkspace/
+StockTests/
 
 # CocoaPods
 #

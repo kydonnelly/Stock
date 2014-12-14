@@ -21,7 +21,8 @@
 
 @interface StockSelectionViewController ()
 
-// can I do this without caching stock info?
+@property (nonatomic, retain) IBOutlet StockSelectionTableView *stockTableView;
+
 @property (nonatomic, retain) NSArray *activeCategories;
 @property (nonatomic, retain) NSMutableDictionary *stocksForCategory;
 @property (nonatomic, retain) NSMutableDictionary *categoryForStock;

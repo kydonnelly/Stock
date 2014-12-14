@@ -23,7 +23,6 @@ typedef enum {
 
 + (StockSelectionCategory)categoryForKey:(id)key;
 
-// todo(kyle): make these sorted arrays
 - (NSArray *)activeStockCategories;
 - (NSArray *)activeStocksForCategory:(StockSelectionCategory)category;
 

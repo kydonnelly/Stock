@@ -20,4 +20,6 @@
 @property (nonatomic, retain) NSMutableArray *offlineStocks;
 @property (nonatomic, retain) NSMutableArray *recentStocks;
 
+@property (nonatomic, retain) NSMutableArray *defaultIndicators;
+
 @end

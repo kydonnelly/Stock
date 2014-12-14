@@ -12,16 +12,18 @@
 #import "ClassUtils.h"
 #import "DisplayUtils.h"
 #import "ExtendedStateButton.h"
+#import "GameContext.h"
 #import "GraphView.h"
+#import "Indicator.h"
+#import "IndicatorDatasource+Protocol.h"
 #import "MasterViewController.h"
+#import "StockPriceIndicator.h"
 #import "Stock.h"
 #import "StockListManager.h"
 #import "StockPriceManager.h"
 #import "StockSelectionViewController.h"
 
-#define MAX_GRAPH_POINTS 500
-
-@interface PriceGraphViewController () <UIGestureRecognizerDelegate>
+@interface PriceGraphViewController () <IndicatorDatasource, UIGestureRecognizerDelegate>
 
 @property (nonatomic, retain) IBOutlet GraphView *graphView;
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
@@ -33,7 +35,10 @@
 
 @property (nonatomic) float displayedStartTime;
 @property (nonatomic) float displayedEndTime;
-@property (nonatomic) int lastClosePrice;
+@property (nonatomic) float lastClosePrice;
+
+@property (nonatomic, retain) NSMutableSet *primaryIndicators;
+@property (nonatomic, retain) NSMutableSet *secondaryIndicators;
 
 @end
 
@@ -46,6 +51,7 @@ RegisterWithCallCenter
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self setupIndicators];
     [self setupOutlets];
     [self refresh];
 }
@@ -57,6 +63,9 @@ RegisterWithCallCenter
     ReleaseIvar(_optionsSliderView);
     
     ReleaseIvar(_stock);
+    
+    ReleaseIvar(_primaryIndicators);
+    ReleaseIvar(_secondaryIndicators);
     
     [super dealloc];
 }
@@ -88,6 +97,16 @@ RegisterWithCallCenter
     [pinch setDelegate:self];
     [pinch setDelaysTouchesBegan:YES];
     [self.graphView addGestureRecognizer:pinch];
+    [self.graphView setIndicatorDatasource:self];
+}
+
+- (void)setupIndicators {
+    self.primaryIndicators = [NSMutableSet setWithObject:[[[StockPriceIndicator alloc] init] autorelease]];
+    self.secondaryIndicators = [NSMutableSet set];
+    
+    for (Indicator *indicator in gcontext(defaultIndicators)) {
+        [[self indicatorsOfType:indicator.indicatorType] addObject:indicator];
+    }
 }
 
 #pragma mark - Refresh
@@ -110,28 +129,18 @@ RegisterWithCallCenter
     float maxPrice = 0.f;
     NSArray *prices = [GET(StockPriceManager) pricesOfStockId:self.stock.stockId startTime:self.displayedStartTime endTime:self.displayedEndTime];
     
-    NSMutableArray *trimmedPrices = [NSMutableArray array];
-    int removalMod = [prices count] / MAX_GRAPH_POINTS;
-    int removalCounter = 0;
-    
-    for (NSNumber *priceNumber in prices) {
-        float price = [priceNumber floatValue];
-        if (price < minPrice) {
-            minPrice = price;
-        }
-        if (price > maxPrice) {
-            maxPrice = price;
-        }
+    for (Indicator *primaryIndicator in self.primaryIndicators) {
+        [primaryIndicator setupWithPrices:prices];
         
-        if (removalCounter >= removalMod) {
-            [trimmedPrices addObject:priceNumber];
-            removalCounter = 0;
-        } else {
-            removalCounter++;
-        }
+        minPrice = MIN(minPrice, primaryIndicator.minPrice);
+        maxPrice = MAX(maxPrice, primaryIndicator.maxPrice);
     }
     
-    [self.graphView setMinX:self.displayedStartTime maxX:self.displayedEndTime minY:minPrice maxY:maxPrice axisY:self.lastClosePrice yValues:trimmedPrices];
+    for (Indicator *secondaryIndicator in self.secondaryIndicators) {
+        [secondaryIndicator setupWithPrices:prices];
+    }
+    
+    [self.graphView setMinX:self.displayedStartTime maxX:self.displayedEndTime minY:minPrice maxY:maxPrice axisY:self.lastClosePrice];
 }
 
 - (void)refreshOptionsSlider {
@@ -147,6 +156,19 @@ RegisterWithCallCenter
 - (IBAction)favoriteButtonPressed {
     self.stockCategory = [GET(StockListManager) changeStatusForStock:self.stock currentCategory:self.stockCategory];
     [self refreshFavoriteButton];
+}
+
+#pragma mark - IndicatorDatasource methods
+
+- (NSMutableSet *)indicatorsOfType:(IndicatorType)indicatorType {
+    switch (indicatorType) {
+        case IndicatorTypePrimary:
+            return self.primaryIndicators;
+        case IndicatorTypeSecondary:
+            return self.secondaryIndicators;
+        default:
+            return nil;
+    }
 }
 
 // todo

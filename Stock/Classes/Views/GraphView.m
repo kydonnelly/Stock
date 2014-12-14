@@ -9,6 +9,7 @@
 #import "GraphView.h"
 
 #import "ClassUtils.h"
+#import "Indicator.h"
 
 #define VERTICAL_SECTIONS 5
 #define HORIZONTAL_SECTIONS 4
@@ -32,9 +33,10 @@ typedef struct {
 @property (nonatomic) axisInfo xStepInfo;
 @property (nonatomic) axisInfo yStepInfo;
 
-@property (nonatomic) CGFloat startX;
-@property (nonatomic) CGFloat endX;
-@property (nonatomic, retain) NSMutableArray *yValues;
+@property (nonatomic) CGFloat minY;
+@property (nonatomic) CGFloat maxY;
+
+@property (nonatomic, assign) id<IndicatorDatasource> indicatorDatasource;
 
 @end
 
@@ -42,16 +44,8 @@ typedef struct {
 
 #pragma mark - Lifecycle
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        self.yValues = [NSMutableArray array];
-    }
-    
-    return self;
-}
-
 - (void)dealloc {
-    ReleaseIvar(_yValues);
+    _indicatorDatasource = nil;
     
     [super dealloc];
 }
@@ -98,7 +92,7 @@ typedef struct {
     return axisInfo;
 }
 
-- (void)setMinX:(float)minX maxX:(float)maxX minY:(float)minY maxY:(float)maxY axisY:(float)axisY yValues:(NSArray *)yValues {
+- (void)setMinX:(float)minX maxX:(float)maxX minY:(float)minY maxY:(float)maxY axisY:(float)axisY {
     CGFloat yBuffer = (maxY - minY) * VERTICAL_BUFFER;
     maxY += yBuffer;
     minY -= yBuffer;
@@ -116,11 +110,8 @@ typedef struct {
                                     numSteps:VERTICAL_SECTIONS
                                 contextScale:yScale];
     
-    [self.yValues removeAllObjects];
-    for (NSNumber *yNumber in yValues) {
-        float scaledY = ([yNumber floatValue] - minY) * yScale;
-        [self.yValues addObject:@(self.frame.size.height - scaledY)];
-    }
+    self.minY = minY;
+    self.maxY = maxY;
     
     [self setNeedsDisplay];
 }
@@ -145,10 +136,12 @@ typedef struct {
     
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextSetLineWidth(context, 0.4f);
-    [self drawGraphValues:context];
+    [self drawPrimaryIndicators:context];
     
 	UIGraphicsPopContext();
 }
+
+#pragma mark - Grid Lines
 
 - (void)drawAxis:(CGContextRef)context {
     CGContextBeginPath(context);
@@ -189,6 +182,8 @@ typedef struct {
     CGContextStrokePath(context);
 }
 
+#pragma mark - Grid Labels
+
 - (void)drawNumberText:(float)value decimalPrecision:(int)precision x:(CGFloat)x y:(CGFloat)y {
     NSString *format = [@"%" stringByAppendingString:[NSString stringWithFormat:@".%df", precision]];
     NSString *text = [NSString stringWithFormat:format, value];
@@ -217,34 +212,44 @@ typedef struct {
 }
 
 - (void)addHorizontalLabels:(CGContextRef)context {
-    CGFloat yPos = self.frame.size.height - self.yStepInfo.drawingStepInfo.stepStart;
+    CGFloat yPosition = self.frame.size.height - self.yStepInfo.drawingStepInfo.stepStart;
     float yValue = self.yStepInfo.displayStepInfo.stepStart;
     
     for (int i = 0; i < VERTICAL_SECTIONS; i++) {
-        [self drawNumberText:yValue decimalPrecision:self.yStepInfo.displayPrecision x:0 y:yPos];
+        [self drawNumberText:yValue decimalPrecision:self.yStepInfo.displayPrecision x:0 y:yPosition];
         
-        yPos -= self.yStepInfo.drawingStepInfo.step;
+        yPosition -= self.yStepInfo.drawingStepInfo.step;
         yValue += self.yStepInfo.displayStepInfo.step;
     }
 }
 
-- (void)drawGraphValues:(CGContextRef)context {
-    CGContextBeginPath(context);
+#pragma mark - Price & Indicators
+
+- (void)drawPrimaryIndicators:(CGContextRef)context {
+    NSSet *primaryIndicators = [self.indicatorDatasource indicatorsOfType:IndicatorTypePrimary];
     
-    CGFloat x = 0;
-    CGFloat xStep = self.frame.size.width / [self.yValues count];
-    CGContextMoveToPoint(context, x, [[self.yValues firstObject] floatValue]);
-    
-    for (NSNumber *yNumber in self.yValues) {
-        CGFloat y = [yNumber floatValue];
+    for (Indicator *indicator in primaryIndicators) {
+        NSArray *prices = [indicator allPrices];
         
-        CGContextAddLineToPoint(context, x, y);
-        CGContextMoveToPoint(context, x, y);
+        CGFloat x = 0;
+        CGFloat xStep = self.frame.size.width / [prices count];
+        CGFloat frameHeight = self.frame.size.height;
+        CGFloat yScale = frameHeight / (self.maxY - self.minY);
         
-        x += xStep;
+        CGContextBeginPath(context);
+        CGContextMoveToPoint(context, x, [[prices firstObject] floatValue]);
+        
+        for (NSNumber *yNumber in prices) {
+            CGFloat y = frameHeight - ([yNumber floatValue] - self.minY) * yScale;
+            
+            CGContextAddLineToPoint(context, x, y);
+            CGContextMoveToPoint(context, x, y);
+            
+            x += xStep;
+        }
+        
+        CGContextStrokePath(context);
     }
-    
-    CGContextStrokePath(context);
 }
 
 @end

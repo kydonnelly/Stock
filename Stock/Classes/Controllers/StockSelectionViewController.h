@@ -12,8 +12,6 @@
 
 @interface StockSelectionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, retain) IBOutlet StockSelectionTableView *stockTableView;
-
 - (void)handleStockSelected:(Stock *)stock;
 - (void)toggleFavoriteStatusForStock:(Stock *)stock;
 

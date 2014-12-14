@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27057E211A3D97BC0033F4EF /* StockPriceIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27057E201A3D97BC0033F4EF /* StockPriceIndicator.m */; };
 		271EA3DB1A303A49001BE9D2 /* PriceGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 271EA3D91A303A49001BE9D2 /* PriceGraphViewController.m */; };
 		271EA3DE1A303A87001BE9D2 /* PriceGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271EA3DD1A303A87001BE9D2 /* PriceGraphViewController.xib */; };
 		275847991A33BFD0008F733F /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 275847981A33BFD0008F733F /* GraphView.m */; };
@@ -35,6 +36,7 @@
 		27B9591B1A2AD0C700AA08BA /* StockSelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B9591A1A2AD0C700AA08BA /* StockSelectionTableViewCell.xib */; };
 		27B9591E1A2ADEB600AA08BA /* LocalizationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B9591D1A2ADEB600AA08BA /* LocalizationHelper.m */; };
 		27B959221A2AE9F900AA08BA /* GameContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B959211A2AE9F900AA08BA /* GameContext.m */; };
+		27BC33561A3D917C003A085F /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BC33551A3D917C003A085F /* Indicator.m */; };
 		27DA548E1A2C263200F926B8 /* StockListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DA548D1A2C263200F926B8 /* StockListManager.m */; };
 		27DA54911A2C266900F926B8 /* StockPriceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DA54901A2C266900F926B8 /* StockPriceManager.m */; };
 /* End PBXBuildFile section */
@@ -50,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27057E1E1A3D97320033F4EF /* Indicator+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Indicator+Protected.h"; sourceTree = "<group>"; };
+		27057E1F1A3D97BC0033F4EF /* StockPriceIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockPriceIndicator.h; sourceTree = "<group>"; };
+		27057E201A3D97BC0033F4EF /* StockPriceIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockPriceIndicator.m; sourceTree = "<group>"; };
 		271EA3D81A303A49001BE9D2 /* PriceGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceGraphViewController.h; sourceTree = "<group>"; };
 		271EA3D91A303A49001BE9D2 /* PriceGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceGraphViewController.m; sourceTree = "<group>"; };
 		271EA3DD1A303A87001BE9D2 /* PriceGraphViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceGraphViewController.xib; sourceTree = "<group>"; };
@@ -96,6 +101,10 @@
 		27B9591F1A2ADED200AA08BA /* Singleton+Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Singleton+Protocol.h"; sourceTree = "<group>"; };
 		27B959201A2AE9F900AA08BA /* GameContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameContext.h; sourceTree = "<group>"; };
 		27B959211A2AE9F900AA08BA /* GameContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameContext.m; sourceTree = "<group>"; };
+		27BA24031A3DA4B9000A0270 /* Indicator+Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Indicator+Types.h"; sourceTree = "<group>"; };
+		27BC334F1A3D8658003A085F /* IndicatorDatasource+Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "IndicatorDatasource+Protocol.h"; path = "../../Utilities/IndicatorDatasource+Protocol.h"; sourceTree = "<group>"; };
+		27BC33541A3D917C003A085F /* Indicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Indicator.h; sourceTree = "<group>"; };
+		27BC33551A3D917C003A085F /* Indicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indicator.m; sourceTree = "<group>"; };
 		27DA548C1A2C263200F926B8 /* StockListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockListManager.h; sourceTree = "<group>"; };
 		27DA548D1A2C263200F926B8 /* StockListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockListManager.m; sourceTree = "<group>"; };
 		27DA548F1A2C266900F926B8 /* StockPriceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockPriceManager.h; sourceTree = "<group>"; };
@@ -235,10 +244,11 @@
 		27B958F71A2AA2D400AA08BA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				27B959121A2AC97B00AA08BA /* Stock.h */,
-				27B959131A2AC97B00AA08BA /* Stock.m */,
+				27BC33531A3D916A003A085F /* Indicators */,
 				27B959201A2AE9F900AA08BA /* GameContext.h */,
 				27B959211A2AE9F900AA08BA /* GameContext.m */,
+				27B959121A2AC97B00AA08BA /* Stock.h */,
+				27B959131A2AC97B00AA08BA /* Stock.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -289,6 +299,20 @@
 				27B9590A1A2AC47A00AA08BA /* StockSelectionViewController.xib */,
 			);
 			path = Xib;
+			sourceTree = "<group>";
+		};
+		27BC33531A3D916A003A085F /* Indicators */ = {
+			isa = PBXGroup;
+			children = (
+				27BC33541A3D917C003A085F /* Indicator.h */,
+				27BC33551A3D917C003A085F /* Indicator.m */,
+				27BC334F1A3D8658003A085F /* IndicatorDatasource+Protocol.h */,
+				27057E1E1A3D97320033F4EF /* Indicator+Protected.h */,
+				27BA24031A3DA4B9000A0270 /* Indicator+Types.h */,
+				27057E1F1A3D97BC0033F4EF /* StockPriceIndicator.h */,
+				27057E201A3D97BC0033F4EF /* StockPriceIndicator.m */,
+			);
+			path = Indicators;
 			sourceTree = "<group>";
 		};
 		27DA548B1A2C263200F926B8 /* Managers */ = {
@@ -405,6 +429,7 @@
 				27B9591E1A2ADEB600AA08BA /* LocalizationHelper.m in Sources */,
 				271EA3DB1A303A49001BE9D2 /* PriceGraphViewController.m in Sources */,
 				27B959001A2AB3A800AA08BA /* CallCenter.m in Sources */,
+				27BC33561A3D917C003A085F /* Indicator.m in Sources */,
 				276B1D911A2A6A4300B7EF9F /* AppDelegate.m in Sources */,
 				27B959221A2AE9F900AA08BA /* GameContext.m in Sources */,
 				27B958FD1A2AA39400AA08BA /* MasterViewController.m in Sources */,
@@ -415,6 +440,7 @@
 				27DA548E1A2C263200F926B8 /* StockListManager.m in Sources */,
 				27B959141A2AC97B00AA08BA /* Stock.m in Sources */,
 				27DA54911A2C266900F926B8 /* StockPriceManager.m in Sources */,
+				27057E211A3D97BC0033F4EF /* StockPriceIndicator.m in Sources */,
 				27B959181A2AD0AC00AA08BA /* StockSelectionTableViewCell.m in Sources */,
 				27B959071A2AC43600AA08BA /* StockSelectionViewController.m in Sources */,
 			);

@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import "IndicatorDatasource+Protocol.h"
+
 @interface GraphView : UIView
 
 - (void)setMinX:(float)minX
            maxX:(float)maxX
            minY:(float)minY
            maxY:(float)maxY
-          axisY:(float)axis
-        yValues:(NSArray *)yValues;
+          axisY:(float)axis;
+
+- (void)setIndicatorDatasource:(id<IndicatorDatasource>)datasource;
 
 @end

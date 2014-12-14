@@ -27,6 +27,8 @@ MakeSingleton
         self.offlineStocks = [NSMutableArray array];
         self.recentStocks = [NSMutableArray array];
         
+        self.defaultIndicators = [NSMutableArray array];
+        
         [self initializeStockDataForTesting];
     }
     
@@ -41,6 +43,8 @@ MakeSingleton
     ReleaseIvar(_favoriteStocks);
     ReleaseIvar(_offlineStocks);
     ReleaseIvar(_recentStocks);
+    
+    ReleaseIvar(_defaultIndicators);
     
     [super dealloc];
 }

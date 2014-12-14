@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class Stock, StockSelectionTableView;
+@class Stock;
 
 @interface StockSelectionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 

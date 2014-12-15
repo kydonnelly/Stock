@@ -14,8 +14,9 @@
 
 @interface IndicatorListSliderTableViewCell ()
 
-@property (nonatomic, retain) IBOutlet UILabel *indicatorNameLabel;
-@property (nonatomic, retain) IBOutlet UISwitch *indicatorActiveSwitch;
+@property (nonatomic, retain) IBOutlet UIView *colorView;
+@property (nonatomic, retain) IBOutlet UILabel *nameLabel;
+@property (nonatomic, retain) IBOutlet UISwitch *activeSwitch;
 
 @property (nonatomic, retain) Indicator *indicator;
 
@@ -28,8 +29,9 @@
 - (void)dealloc {
     _owner = nil;
     
-    ReleaseIvar(_indicatorNameLabel);
-    ReleaseIvar(_indicatorActiveSwitch);
+    ReleaseIvar(_colorView);
+    ReleaseIvar(_nameLabel);
+    ReleaseIvar(_activeSwitch);
     
     ReleaseIvar(_indicator);
     
@@ -41,14 +43,15 @@
 - (void)setupWithIndicator:(Indicator *)indicator isActive:(BOOL)isActive {
     self.indicator = indicator;
     
-    [self.indicatorNameLabel setText:[indicator displayName]];
-    self.indicatorActiveSwitch.on = isActive;
+    [self.colorView setBackgroundColor:[indicator displayColor]];
+    [self.nameLabel setText:[indicator displayName]];
+    self.activeSwitch.on = isActive;
 }
 
 #pragma mark - Action
 
 - (IBAction)activeSwitchPressed {
-    [self.owner toggleIndicator:self.indicator activeState:self.indicatorActiveSwitch.on];
+    [self.owner toggleIndicator:self.indicator activeState:self.activeSwitch.on];
 }
 
 @end

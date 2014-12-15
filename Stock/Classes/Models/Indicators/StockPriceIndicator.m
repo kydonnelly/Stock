@@ -20,4 +20,12 @@
     return @"Price";
 }
 
+- (UIColor *)displayColor {
+    return [UIColor blackColor];
+}
+
+- (float)lineWidth {
+    return 0.4;
+}
+
 @end

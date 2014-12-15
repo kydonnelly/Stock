@@ -79,6 +79,16 @@
     return nil;
 }
 
+- (UIColor *)displayColor {
+    AbstractMethod
+    return [UIColor blackColor];
+}
+
+- (float)lineWidth {
+    AbstractMethod
+    return 0.f;
+}
+
 @end
 
 @implementation SecondaryIndicator

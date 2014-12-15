@@ -134,8 +134,6 @@ typedef struct {
     [self addVerticalLabels:context];
     [self addHorizontalLabels:context];
     
-    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
-    CGContextSetLineWidth(context, 0.4f);
     [self drawPrimaryIndicators:context];
     
 	UIGraphicsPopContext();
@@ -229,6 +227,9 @@ typedef struct {
     NSSet *primaryIndicators = [self.indicatorDatasource activeIndicatorsOfType:IndicatorTypePrimary];
     
     for (Indicator *indicator in primaryIndicators) {
+        CGContextSetStrokeColorWithColor(context, [indicator displayColor].CGColor);
+        CGContextSetLineWidth(context, [indicator lineWidth]);
+        
         NSArray *prices = [indicator allPrices];
         
         CGFloat x = 0;

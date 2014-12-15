@@ -13,6 +13,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view appearanceType="aqua" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tgu-H1-nal" userLabel="Color View">
+                        <rect key="frame" x="5" y="16" width="10" height="10"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                     <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8aT-PW-uPN" userLabel="Name Label">
                         <rect key="frame" x="20" y="0.0" width="230" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -30,8 +35,9 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="indicatorActiveSwitch" destination="4dl-tt-3gt" id="yBd-8v-yL8"/>
-                <outlet property="indicatorNameLabel" destination="8aT-PW-uPN" id="oLL-tE-YCp"/>
+                <outlet property="activeSwitch" destination="4dl-tt-3gt" id="24p-bH-2ST"/>
+                <outlet property="colorView" destination="tgu-H1-nal" id="zwk-RI-fHd"/>
+                <outlet property="nameLabel" destination="8aT-PW-uPN" id="BBu-Rk-AGE"/>
             </connections>
         </tableViewCell>
     </objects>

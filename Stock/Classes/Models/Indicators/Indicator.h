@@ -28,6 +28,8 @@
 
 - (IndicatorType)indicatorType;
 - (NSString *)displayName;
+- (UIColor *)displayColor;
+- (float)lineWidth;
 
 @end
 

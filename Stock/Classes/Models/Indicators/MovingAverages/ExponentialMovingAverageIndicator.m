@@ -37,6 +37,14 @@ RegisterForOptionsSlider
     return [GET(LocalizationHelper) localizedStringForKey:@"EMA"];
 }
 
+- (UIColor *)displayColor {
+    return [UIColor redColor];
+}
+
+- (float)lineWidth {
+    return 0.5;
+}
+
 #pragma mark - Indicator logic
 
 - (float)cacheInitialMovingAverage {

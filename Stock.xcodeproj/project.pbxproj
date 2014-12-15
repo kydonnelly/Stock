@@ -39,6 +39,7 @@
 		27BC33561A3D917C003A085F /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BC33551A3D917C003A085F /* Indicator.m */; };
 		27DA548E1A2C263200F926B8 /* StockListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DA548D1A2C263200F926B8 /* StockListManager.m */; };
 		27DA54911A2C266900F926B8 /* StockPriceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DA54901A2C266900F926B8 /* StockPriceManager.m */; };
+		27E4C4921A3E79520079B803 /* SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E4C4911A3E79520079B803 /* SliderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,8 @@
 		27DA548D1A2C263200F926B8 /* StockListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockListManager.m; sourceTree = "<group>"; };
 		27DA548F1A2C266900F926B8 /* StockPriceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockPriceManager.h; sourceTree = "<group>"; };
 		27DA54901A2C266900F926B8 /* StockPriceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockPriceManager.m; sourceTree = "<group>"; };
+		27E4C4901A3E79520079B803 /* SliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderView.h; sourceTree = "<group>"; };
+		27E4C4911A3E79520079B803 /* SliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +277,8 @@
 				27A7FF531A2B2D6C00BF2DDA /* ExtendedStateButton.m */,
 				275847971A33BFD0008F733F /* GraphView.h */,
 				275847981A33BFD0008F733F /* GraphView.m */,
+				27E4C4901A3E79520079B803 /* SliderView.h */,
+				27E4C4911A3E79520079B803 /* SliderView.m */,
 				27B9590C1A2AC55500AA08BA /* StockSelectionTableView.h */,
 				27B9590D1A2AC55500AA08BA /* StockSelectionTableView.m */,
 				27B959151A2AD0AC00AA08BA /* StockSelectionTableViewCell.h */,
@@ -439,6 +444,7 @@
 				276B1D8D1A2A6A4300B7EF9F /* main.m in Sources */,
 				27DA548E1A2C263200F926B8 /* StockListManager.m in Sources */,
 				27B959141A2AC97B00AA08BA /* Stock.m in Sources */,
+				27E4C4921A3E79520079B803 /* SliderView.m in Sources */,
 				27DA54911A2C266900F926B8 /* StockPriceManager.m in Sources */,
 				27057E211A3D97BC0033F4EF /* StockPriceIndicator.m in Sources */,
 				27B959181A2AD0AC00AA08BA /* StockSelectionTableViewCell.m in Sources */,

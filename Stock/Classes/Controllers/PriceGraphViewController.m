@@ -17,6 +17,7 @@
 #import "Indicator.h"
 #import "IndicatorDatasource+Protocol.h"
 #import "MasterViewController.h"
+#import "SliderView.h"
 #import "StockPriceIndicator.h"
 #import "Stock.h"
 #import "StockListManager.h"
@@ -28,7 +29,7 @@
 @property (nonatomic, retain) IBOutlet GraphView *graphView;
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic, retain) IBOutlet ExtendedStateButton *favoriteButton;
-@property (nonatomic, retain) IBOutlet UIView *optionsSliderView;
+@property (nonatomic, retain) IBOutlet SliderView *optionsSliderView;
 
 @property (nonatomic, retain) Stock *stock;
 @property (nonatomic) StockSelectionCategory stockCategory;
@@ -48,12 +49,23 @@ RegisterWithCallCenter
 
 #pragma mark - Lifecycle
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
     [self setupIndicators];
     [self setupOutlets];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self refresh];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.optionsSliderView setExpanded:NO animated:NO];
 }
 
 - (void)dealloc {
@@ -98,6 +110,8 @@ RegisterWithCallCenter
     [pinch setDelaysTouchesBegan:YES];
     [self.graphView addGestureRecognizer:pinch];
     [self.graphView setIndicatorDatasource:self];
+    
+    [self.optionsSliderView setup];
 }
 
 - (void)setupIndicators {
@@ -117,11 +131,8 @@ RegisterWithCallCenter
 }
 
 - (void)refreshFavoriteButton {
-    if (self.stockCategory == StockSelectionCategoryFavorite) {
-        self.favoriteButton.state = UIControlStateApplication;
-    } else {
-        self.favoriteButton.state &= ~UIControlStateApplication;
-    }
+    BOOL isFavorite = (self.stockCategory == StockSelectionCategoryFavorite);
+    [self.favoriteButton setInCustomState:isFavorite];
 }
 
 - (void)refreshGraphView {

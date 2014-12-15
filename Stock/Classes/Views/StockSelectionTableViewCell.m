@@ -107,11 +107,8 @@ typedef enum {
     id stockKey = [Stock keyForStockId:self.stock.stockId];
     NSArray *favoriteStocks = [GET(StockListManager) activeStocksForCategory:StockSelectionCategoryFavorite];
     
-    if ([favoriteStocks containsObject:stockKey]) {
-        self.favoriteButton.state = UIControlStateApplication;
-    } else {
-        self.favoriteButton.state &= ~UIControlStateApplication;
-    }
+    BOOL isFavorite = [favoriteStocks containsObject:stockKey];
+    [self.favoriteButton setInCustomState:isFavorite];
 }
 
 #pragma mark - Action handlers

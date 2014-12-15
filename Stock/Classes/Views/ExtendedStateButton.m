@@ -16,6 +16,14 @@
 
 @implementation ExtendedStateButton
 
+- (void)setInCustomState:(BOOL)isInCustomState {
+    if (isInCustomState) {
+        self.state = UIControlStateApplication;
+    } else {
+        self.state &= ~UIControlStateApplication;
+    }
+}
+
 - (void)setState:(UIControlState)state {
     if (_customState != state) {
         _customState = state;

@@ -10,6 +10,6 @@
 
 @interface ExtendedStateButton : UIButton
 
-- (void)setState:(UIControlState)state;
+- (void)setInCustomState:(BOOL)isInCustomState;
 
 @end

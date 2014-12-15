@@ -12,7 +12,7 @@
 #import "ClassUtils.h"
 #import "DisplayUtils.h"
 #import "ExtendedStateButton.h"
-#import "GameContext.h"
+#import "AppData.h"
 #import "GraphView.h"
 #import "Indicator.h"
 #import "IndicatorDatasource+Protocol.h"
@@ -118,7 +118,7 @@ RegisterWithCallCenter
     self.primaryIndicators = [NSMutableSet setWithObject:[[[StockPriceIndicator alloc] init] autorelease]];
     self.secondaryIndicators = [NSMutableSet set];
     
-    for (Indicator *indicator in gcontext(defaultIndicators)) {
+    for (Indicator *indicator in appData(defaultIndicators)) {
         [[self activeIndicatorsOfType:indicator.indicatorType] addObject:indicator];
     }
 }

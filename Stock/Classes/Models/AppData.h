@@ -1,5 +1,5 @@
 //
-//  GameContext.h
+//  AppData.h
 //  Stock
 //
 //  Created by Kyle Donnelly on 11/29/14.
@@ -8,9 +8,9 @@
 
 #import "Singleton+Protocol.h"
 
-#define gcontext(property) GET(GameContext).property
+#define appData(property) GET(AppData).property
 
-@interface GameContext : NSObject <Singleton>
+@interface AppData : NSObject <Singleton>
 
 @property (nonatomic, retain) NSMutableDictionary *stocks;
 

@@ -10,7 +10,7 @@
 
 #import "CallCenter.h"
 #import "ClassUtils.h"
-#import "GameContext.h"
+#import "AppData.h"
 #import "LocalizationHelper.h"
 #import "MasterViewController.h"
 #import "PriceGraphViewController.h"
@@ -81,7 +81,7 @@ RegisterWithCallCenter
     self.activeCategories = [[slm activeStockCategories] sortedArrayUsingSelector:@selector(compare:)];
     
     self.stocksForCategory = [NSMutableDictionary dictionaryWithCapacity:[self.activeCategories count]];
-    self.categoryForStock = [NSMutableDictionary dictionaryWithCapacity:[gcontext(stocks) count]];
+    self.categoryForStock = [NSMutableDictionary dictionaryWithCapacity:[appData(stocks) count]];
     
     for (id categoryKey in self.activeCategories) {
         StockSelectionCategory category = [[slm class] categoryForKey:categoryKey];

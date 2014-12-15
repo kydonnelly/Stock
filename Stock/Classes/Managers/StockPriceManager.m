@@ -8,7 +8,7 @@
 
 #import "StockPriceManager.h"
 
-#import "GameContext.h"
+#import "AppData.h"
 #import "Stock.h"
 
 @implementation StockPriceManager
@@ -21,7 +21,7 @@ MakeSingleton
 
 - (float)lastPriceForStockId:(int)stockId daysAgo:(int)daysAgo {
     id stockKey = [Stock keyForStockId:stockId];
-    NSArray *dailyPrices = [gcontext(stockPriceHistories) objectForKey:stockKey];
+    NSArray *dailyPrices = [appData(stockPriceHistories) objectForKey:stockKey];
     int dailyPricesCount = [dailyPrices count];
     
     NSArray *prices = nil;
@@ -34,7 +34,7 @@ MakeSingleton
 
 - (NSArray *)pricesOfStockId:(int)stockId startTime:(int)startTime endTime:(int)endTime {
     id stockKey = [Stock keyForStockId:stockId];
-    NSArray *dailyPrices = [gcontext(stockPriceHistories) objectForKey:stockKey];
+    NSArray *dailyPrices = [appData(stockPriceHistories) objectForKey:stockKey];
     int dailyPricesCount = [dailyPrices count];
     
     int startIndex = MAX(dailyPricesCount + startTime - 1, 0);

@@ -1,17 +1,17 @@
 //
-//  GameContext.m
+//  AppData.m
 //  Stock
 //
 //  Created by Kyle Donnelly on 11/29/14.
 //  Copyright (c) 2014 kyle. All rights reserved.
 //
 
-#import "GameContext.h"
+#import "AppData.h"
 
 #import "ClassUtils.h"
 #import "Stock.h" // for testing
 
-@implementation GameContext
+@implementation AppData
 
 #pragma mark - Lifecycle
 

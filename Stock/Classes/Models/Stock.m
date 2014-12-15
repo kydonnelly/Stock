@@ -9,7 +9,7 @@
 #import "Stock.h"
 
 #import "ClassUtils.h"
-#import "GameContext.h"
+#import "AppData.h"
 
 @implementation Stock
 
@@ -20,7 +20,7 @@
 }
 
 + (Stock *)loadByStockId:(int)stockId {
-    return [gcontext(stocks) objectForKey:[self keyForStockId:stockId]];
+    return [appData(stocks) objectForKey:[self keyForStockId:stockId]];
 }
 
 #pragma mark - Lifecycle

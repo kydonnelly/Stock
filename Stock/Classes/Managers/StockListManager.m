@@ -9,7 +9,7 @@
 #import "StockListManager.h"
 
 #import "ClassUtils.h"
-#import "GameContext.h"
+#import "AppData.h"
 #import "Stock.h"
 
 #define RECENTLY_VIEWED_QUEUE_SIZE 5
@@ -60,13 +60,13 @@ MakeSingleton
 }
 
 - (void)setupStockCategories {
-    [self setupStocks:gcontext(favoriteStocks)
+    [self setupStocks:appData(favoriteStocks)
            inCategory:StockSelectionCategoryFavorite];
     
-    [self setupStocks:gcontext(offlineStocks)
+    [self setupStocks:appData(offlineStocks)
            inCategory:StockSelectionCategoryTemporary];
     
-    [self setupStocks:gcontext(recentStocks)
+    [self setupStocks:appData(recentStocks)
            inCategory:StockSelectionCategoryRecent];
 }
 

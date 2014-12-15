@@ -42,19 +42,19 @@
     int removalCounter = 0;
     
     for (NSNumber *priceNumber in prices) {
-        float price = [self indicatorPriceForRawPrice:[priceNumber floatValue]];
-        if (price < self.minPrice) {
-            self.minPrice = price;
-        }
-        if (price > self.maxPrice) {
-            self.maxPrice = price;
-        }
-        
-        if (removalCounter >= removalMod) {
-            [self.yValues addObject:@(price)];
-            removalCounter = 0;
-        } else {
+        if (removalCounter < removalMod) {
             removalCounter++;
+        } else {
+            float price = [self indicatorPriceForRawPrice:[priceNumber floatValue]];
+            if (price < self.minPrice) {
+                self.minPrice = price;
+            }
+            if (price > self.maxPrice) {
+                self.maxPrice = price;
+            }
+            
+            removalCounter = 0;
+            [self.yValues addObject:@(price)];
         }
     }
 }
@@ -64,7 +64,7 @@
     return 0;
 }
 
-#pragma mark - queries
+#pragma mark - Display Queries
 
 - (NSArray *)allPrices {
     return self.yValues;

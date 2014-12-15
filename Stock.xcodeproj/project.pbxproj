@@ -10,6 +10,8 @@
 		27057E211A3D97BC0033F4EF /* StockPriceIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27057E201A3D97BC0033F4EF /* StockPriceIndicator.m */; };
 		271EA3DB1A303A49001BE9D2 /* PriceGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 271EA3D91A303A49001BE9D2 /* PriceGraphViewController.m */; };
 		271EA3DE1A303A87001BE9D2 /* PriceGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271EA3DD1A303A87001BE9D2 /* PriceGraphViewController.xib */; };
+		274651C61A3EC15F0094748C /* MovingAverageIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 274651C31A3EC15F0094748C /* MovingAverageIndicator.m */; };
+		274651C71A3EC15F0094748C /* SimpleMovingAverageIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 274651C51A3EC15F0094748C /* SimpleMovingAverageIndicator.m */; };
 		275847991A33BFD0008F733F /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 275847981A33BFD0008F733F /* GraphView.m */; };
 		276B1D811A2A6A4300B7EF9F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276B1D801A2A6A4300B7EF9F /* Foundation.framework */; };
 		276B1D831A2A6A4300B7EF9F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276B1D821A2A6A4300B7EF9F /* CoreGraphics.framework */; };
@@ -39,6 +41,7 @@
 		27B9591E1A2ADEB600AA08BA /* LocalizationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B9591D1A2ADEB600AA08BA /* LocalizationHelper.m */; };
 		27B959221A2AE9F900AA08BA /* GameContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B959211A2AE9F900AA08BA /* GameContext.m */; };
 		27BC33561A3D917C003A085F /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BC33551A3D917C003A085F /* Indicator.m */; };
+		27BEE9F61A3EC27F007225E2 /* ExponentialMovingAverageIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BEE9F51A3EC27F007225E2 /* ExponentialMovingAverageIndicator.m */; };
 		27DA548E1A2C263200F926B8 /* StockListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DA548D1A2C263200F926B8 /* StockListManager.m */; };
 		27DA54911A2C266900F926B8 /* StockPriceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DA54901A2C266900F926B8 /* StockPriceManager.m */; };
 		27E4C4921A3E79520079B803 /* SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E4C4911A3E79520079B803 /* SliderView.m */; };
@@ -64,6 +67,11 @@
 		271EA3D91A303A49001BE9D2 /* PriceGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceGraphViewController.m; sourceTree = "<group>"; };
 		271EA3DD1A303A87001BE9D2 /* PriceGraphViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceGraphViewController.xib; sourceTree = "<group>"; };
 		271EA3DF1A3051C5001BE9D2 /* DisplayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayUtils.h; sourceTree = "<group>"; };
+		274651C21A3EC15F0094748C /* MovingAverageIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingAverageIndicator.h; sourceTree = "<group>"; };
+		274651C31A3EC15F0094748C /* MovingAverageIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingAverageIndicator.m; sourceTree = "<group>"; };
+		274651C41A3EC15F0094748C /* SimpleMovingAverageIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleMovingAverageIndicator.h; sourceTree = "<group>"; };
+		274651C51A3EC15F0094748C /* SimpleMovingAverageIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleMovingAverageIndicator.m; sourceTree = "<group>"; };
+		274651C81A3EC17D0094748C /* MovingAverageIndicator+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MovingAverageIndicator+Protected.h"; sourceTree = "<group>"; };
 		275847971A33BFD0008F733F /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
 		275847981A33BFD0008F733F /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
 		276B1D7D1A2A6A4300B7EF9F /* Stock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stock.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +121,8 @@
 		27BC334F1A3D8658003A085F /* IndicatorDatasource+Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "IndicatorDatasource+Protocol.h"; path = "../../Utilities/IndicatorDatasource+Protocol.h"; sourceTree = "<group>"; };
 		27BC33541A3D917C003A085F /* Indicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Indicator.h; sourceTree = "<group>"; };
 		27BC33551A3D917C003A085F /* Indicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indicator.m; sourceTree = "<group>"; };
+		27BEE9F41A3EC27F007225E2 /* ExponentialMovingAverageIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExponentialMovingAverageIndicator.h; sourceTree = "<group>"; };
+		27BEE9F51A3EC27F007225E2 /* ExponentialMovingAverageIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExponentialMovingAverageIndicator.m; sourceTree = "<group>"; };
 		27DA548C1A2C263200F926B8 /* StockListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockListManager.h; sourceTree = "<group>"; };
 		27DA548D1A2C263200F926B8 /* StockListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockListManager.m; sourceTree = "<group>"; };
 		27DA548F1A2C266900F926B8 /* StockPriceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockPriceManager.h; sourceTree = "<group>"; };
@@ -149,6 +159,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		274651C11A3EC1310094748C /* MovingAverages */ = {
+			isa = PBXGroup;
+			children = (
+				274651C21A3EC15F0094748C /* MovingAverageIndicator.h */,
+				274651C31A3EC15F0094748C /* MovingAverageIndicator.m */,
+				274651C81A3EC17D0094748C /* MovingAverageIndicator+Protected.h */,
+				274651C41A3EC15F0094748C /* SimpleMovingAverageIndicator.h */,
+				274651C51A3EC15F0094748C /* SimpleMovingAverageIndicator.m */,
+				27BEE9F41A3EC27F007225E2 /* ExponentialMovingAverageIndicator.h */,
+				27BEE9F51A3EC27F007225E2 /* ExponentialMovingAverageIndicator.m */,
+			);
+			path = MovingAverages;
+			sourceTree = "<group>";
+		};
 		276B1D741A2A6A4200B7EF9F = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +351,7 @@
 		27BC33531A3D916A003A085F /* Indicators */ = {
 			isa = PBXGroup;
 			children = (
+				274651C11A3EC1310094748C /* MovingAverages */,
 				27BC33541A3D917C003A085F /* Indicator.h */,
 				27BC33551A3D917C003A085F /* Indicator.m */,
 				27BC334F1A3D8658003A085F /* IndicatorDatasource+Protocol.h */,
@@ -461,13 +486,16 @@
 				27A7FF541A2B2D6C00BF2DDA /* ExtendedStateButton.m in Sources */,
 				27E4C4951A3E95120079B803 /* IndicatorListSliderView.m in Sources */,
 				27B9590E1A2AC55500AA08BA /* StockSelectionTableView.m in Sources */,
+				274651C61A3EC15F0094748C /* MovingAverageIndicator.m in Sources */,
 				276B1D8D1A2A6A4300B7EF9F /* main.m in Sources */,
+				27BEE9F61A3EC27F007225E2 /* ExponentialMovingAverageIndicator.m in Sources */,
 				27DA548E1A2C263200F926B8 /* StockListManager.m in Sources */,
 				27B959141A2AC97B00AA08BA /* Stock.m in Sources */,
 				27E4C4921A3E79520079B803 /* SliderView.m in Sources */,
 				27E4C4981A3E96540079B803 /* IndicatorList.m in Sources */,
 				27DA54911A2C266900F926B8 /* StockPriceManager.m in Sources */,
 				27057E211A3D97BC0033F4EF /* StockPriceIndicator.m in Sources */,
+				274651C71A3EC15F0094748C /* SimpleMovingAverageIndicator.m in Sources */,
 				27B959181A2AD0AC00AA08BA /* StockSelectionTableViewCell.m in Sources */,
 				27B959071A2AC43600AA08BA /* StockSelectionViewController.m in Sources */,
 				2781F8A81A3E9B7D00011A14 /* IndicatorListSliderTableViewCell.m in Sources */,

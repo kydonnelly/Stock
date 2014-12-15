@@ -27,6 +27,7 @@
 - (float)maxPrice;
 
 - (IndicatorType)indicatorType;
+- (NSString *)displayName;
 
 @end
 

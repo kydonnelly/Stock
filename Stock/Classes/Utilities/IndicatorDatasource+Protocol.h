@@ -10,8 +10,11 @@
 
 #import "Indicator+Types.h"
 
+@class Indicator;
+
 @protocol IndicatorDatasource
 
-- (NSMutableSet *)indicatorsOfType:(IndicatorType)indicatorType;
+- (NSSet *)activeIndicatorsOfType:(IndicatorType)indicatorType;
+- (void)updateIndicator:(Indicator *)indicator isActive:(BOOL)isActive;
 
 @end

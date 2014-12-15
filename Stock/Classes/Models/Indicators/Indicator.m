@@ -74,6 +74,11 @@
     return IndicatorTypePrimary;
 }
 
+- (NSString *)displayName {
+    AbstractMethod
+    return nil;
+}
+
 @end
 
 @implementation SecondaryIndicator

@@ -16,4 +16,8 @@
     return price;
 }
 
+- (NSString *)displayName {
+    return @"Price";
+}
+
 @end

@@ -16,8 +16,8 @@
 #import "GraphView.h"
 #import "Indicator.h"
 #import "IndicatorDatasource+Protocol.h"
+#import "IndicatorListSliderView.h"
 #import "MasterViewController.h"
-#import "SliderView.h"
 #import "StockPriceIndicator.h"
 #import "Stock.h"
 #import "StockListManager.h"
@@ -29,7 +29,7 @@
 @property (nonatomic, retain) IBOutlet GraphView *graphView;
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic, retain) IBOutlet ExtendedStateButton *favoriteButton;
-@property (nonatomic, retain) IBOutlet SliderView *optionsSliderView;
+@property (nonatomic, retain) IBOutlet IndicatorListSliderView *optionsSliderView;
 
 @property (nonatomic, retain) Stock *stock;
 @property (nonatomic) StockSelectionCategory stockCategory;
@@ -40,6 +40,8 @@
 
 @property (nonatomic, retain) NSMutableSet *primaryIndicators;
 @property (nonatomic, retain) NSMutableSet *secondaryIndicators;
+
+- (NSMutableSet *)activeIndicatorsOfType:(IndicatorType)indicatorType;
 
 @end
 
@@ -111,7 +113,7 @@ RegisterWithCallCenter
     [self.graphView addGestureRecognizer:pinch];
     [self.graphView setIndicatorDatasource:self];
     
-    [self.optionsSliderView setup];
+    [self.optionsSliderView setupWithDatasource:self];
 }
 
 - (void)setupIndicators {
@@ -119,7 +121,7 @@ RegisterWithCallCenter
     self.secondaryIndicators = [NSMutableSet set];
     
     for (Indicator *indicator in gcontext(defaultIndicators)) {
-        [[self indicatorsOfType:indicator.indicatorType] addObject:indicator];
+        [[self activeIndicatorsOfType:indicator.indicatorType] addObject:indicator];
     }
 }
 
@@ -127,6 +129,7 @@ RegisterWithCallCenter
 
 - (void)refresh {
     [self refreshFavoriteButton];
+    [self refreshOptionsSlider];
     [self refreshGraphView];
 }
 
@@ -155,7 +158,7 @@ RegisterWithCallCenter
 }
 
 - (void)refreshOptionsSlider {
-    // todo
+    // todo: might be better UX to revert selections to default indicators
 }
 
 #pragma mark - Actions
@@ -171,7 +174,7 @@ RegisterWithCallCenter
 
 #pragma mark - IndicatorDatasource methods
 
-- (NSMutableSet *)indicatorsOfType:(IndicatorType)indicatorType {
+- (NSMutableSet *)activeIndicatorsOfType:(IndicatorType)indicatorType {
     switch (indicatorType) {
         case IndicatorTypePrimary:
             return self.primaryIndicators;
@@ -180,6 +183,17 @@ RegisterWithCallCenter
         default:
             return nil;
     }
+}
+
+- (void)updateIndicator:(Indicator *)indicator isActive:(BOOL)isActive {
+    NSMutableSet *indicators = [self activeIndicatorsOfType:indicator.indicatorType];
+    if (isActive) {
+        [indicators addObject:indicator];
+    } else {
+        [indicators removeObject:indicator];
+    }
+    
+    [self refresh];
 }
 
 // todo

@@ -57,7 +57,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view appearanceType="aqua" contentMode="scaleToFill" id="y5f-eW-Ckl" userLabel="View - Footer" customClass="SliderView">
+                <view appearanceType="aqua" contentMode="scaleToFill" id="y5f-eW-Ckl" userLabel="View - Footer" customClass="IndicatorListSliderView">
                     <rect key="frame" x="0.0" y="408" width="320" height="160"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -81,6 +81,17 @@
                         <view appearanceType="aqua" contentMode="scaleToFill" id="SM1-Vh-aJ0" userLabel="Collapsing View">
                             <rect key="frame" x="0.0" y="40" width="320" height="120"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <tableView appearanceType="aqua" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6qT-0S-i1r">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="y5f-eW-Ckl" id="JaJ-Gr-zh7"/>
+                                        <outlet property="delegate" destination="y5f-eW-Ckl" id="Kfm-D4-GB8"/>
+                                    </connections>
+                                </tableView>
+                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
@@ -88,6 +99,7 @@
                         <outlet property="alwaysVisibleView" destination="IQf-At-MC3" id="1x0-e5-Ptc"/>
                         <outlet property="collapsableView" destination="SM1-Vh-aJ0" id="Bhb-y4-fEH"/>
                         <outlet property="expandButton" destination="p03-GB-CEo" id="a8u-Z0-MRh"/>
+                        <outlet property="indicatorTable" destination="6qT-0S-i1r" id="Qo2-i1-dtR"/>
                     </connections>
                 </view>
             </subviews>

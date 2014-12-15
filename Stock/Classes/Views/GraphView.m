@@ -226,7 +226,7 @@ typedef struct {
 #pragma mark - Price & Indicators
 
 - (void)drawPrimaryIndicators:(CGContextRef)context {
-    NSSet *primaryIndicators = [self.indicatorDatasource indicatorsOfType:IndicatorTypePrimary];
+    NSSet *primaryIndicators = [self.indicatorDatasource activeIndicatorsOfType:IndicatorTypePrimary];
     
     for (Indicator *indicator in primaryIndicators) {
         NSArray *prices = [indicator allPrices];

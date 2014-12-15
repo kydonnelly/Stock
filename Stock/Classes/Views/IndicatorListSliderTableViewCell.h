@@ -12,7 +12,7 @@
 
 @interface IndicatorListSliderTableViewCell : UITableViewCell
 
-@property (nonatomic, assign) IBOutlet IndicatorListSliderView *owner;
+@property (nonatomic, assign) IndicatorListSliderView *owner;
 
 - (void)setupWithIndicator:(Indicator *)indicator
                   isActive:(BOOL)isActive;

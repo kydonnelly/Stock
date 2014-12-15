@@ -105,8 +105,6 @@ RegisterWithCallCenter
     [self.favoriteButton setImage:[UIImage imageNamed:FAVORITE_ON_IMAGE] forState:UIControlStateApplication];
     [self.favoriteButton setImage:[UIImage imageNamed:FAVORITE_OFF_IMAGE] forState:UIControlStateNormal];
     
-    [self.nameLabel setText:self.stock.ticker];
-    
     UIPinchGestureRecognizer *pinch = [[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(handleGraphPinched:)] autorelease];
     [pinch setDelegate:self];
     [pinch setDelaysTouchesBegan:YES];
@@ -128,6 +126,8 @@ RegisterWithCallCenter
 #pragma mark - Refresh
 
 - (void)refresh {
+    [self.nameLabel setText:self.stock.ticker];
+    
     [self refreshFavoriteButton];
     [self refreshOptionsSlider];
     [self refreshGraphView];

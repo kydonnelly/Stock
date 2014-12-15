@@ -73,7 +73,7 @@ MakeSingleton
             for (int price = 0; price < 250; price++) {
                 float random = arc4random() % 11;
                 float delta = (random - 5) / 10.f;
-                float newPrice = MAX(0, lastPrice + delta);
+                float newPrice = MAX(0.01f, lastPrice + delta);
                 [prices addObject:@(newPrice)];
                 lastPrice = newPrice;
             }

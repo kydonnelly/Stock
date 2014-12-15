@@ -97,7 +97,7 @@ RegisterWithCallCenter
     }
     
     self.lastClosePrice = [GET(StockPriceManager) lastPriceForStockId:self.stock.stockId daysAgo:1];
-    self.displayedStartTime = -2;
+    self.displayedStartTime = -1;
     self.displayedEndTime = 0;
 }
 

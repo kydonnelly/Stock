@@ -38,8 +38,9 @@
     self.maxPrice = 0.f;
     
     self.yValues = [NSMutableArray array];
-    int removalMod = [prices count] / MAX_GRAPH_POINTS;
-    int removalCounter = 0;
+    int pricesCount = [prices count];
+    int removalMod = pricesCount / MAX_GRAPH_POINTS;
+    int removalCounter = removalMod - pricesCount % (removalMod+1);
     
     for (NSNumber *priceNumber in prices) {
         if (removalCounter < removalMod) {

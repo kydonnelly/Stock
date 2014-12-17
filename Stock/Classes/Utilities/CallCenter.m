@@ -56,7 +56,7 @@ MakeSingleton
     UIViewController *viewController = [self.viewControllers objectForKey:key];
     
     if (!viewController) {
-        NSLog(@"Had to force registration of %@", NSStringFromClass(viewControllerClass));
+        AssertWithFormat(NO, @"Had to force registration of %@", NSStringFromClass(viewControllerClass));
         [self registerViewController:viewControllerClass];
     }
     

@@ -10,11 +10,9 @@
 
 #import "ClassUtils.h"
 
-#define MAX_GRAPH_POINTS 500
-
 @interface Indicator ()
 
-@property (nonatomic, retain) NSMutableArray *yValues;
+@property (nonatomic, retain) NSMutableArray *prices;
 
 @property (nonatomic) float minPrice;
 @property (nonatomic) float maxPrice;
@@ -26,7 +24,7 @@
 #pragma mark - Lifecycle
 
 - (void)dealloc {
-    ReleaseIvar(_yValues);
+    ReleaseIvar(_prices);
     
     [super dealloc];
 }
@@ -34,28 +32,20 @@
 #pragma mark - setup
 
 - (void)setupWithPrices:(NSArray *)prices {
+    self.prices = [NSMutableArray arrayWithCapacity:[prices count]];
+    
     self.minPrice = FLT_MAX;
     self.maxPrice = 0.f;
     
-    self.yValues = [NSMutableArray array];
-    int pricesCount = [prices count];
-    int removalMod = pricesCount / MAX_GRAPH_POINTS;
-    int removalCounter = removalMod - pricesCount % (removalMod+1);
-    
     for (NSNumber *priceNumber in prices) {
-        if (removalCounter < removalMod) {
-            removalCounter++;
-        } else {
-            float price = [self indicatorPriceForRawPrice:[priceNumber floatValue]];
-            if (price < self.minPrice) {
-                self.minPrice = price;
-            }
-            if (price > self.maxPrice) {
-                self.maxPrice = price;
-            }
-            
-            removalCounter = 0;
-            [self.yValues addObject:@(price)];
+        float price = [self indicatorPriceForRawPrice:[priceNumber floatValue]];
+        [self.prices addObject:@(price)];
+        
+        if (price < self.minPrice) {
+            self.minPrice = price;
+        }
+        if (price > self.maxPrice) {
+            self.maxPrice = price;
         }
     }
 }
@@ -68,7 +58,7 @@
 #pragma mark - Display Queries
 
 - (NSArray *)allPrices {
-    return self.yValues;
+    return self.prices;
 }
 
 - (IndicatorType)indicatorType {

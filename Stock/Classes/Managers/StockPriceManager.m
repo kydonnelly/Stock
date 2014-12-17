@@ -14,17 +14,17 @@
 
 @implementation StockPriceManager
 
-#pragma mark - Class Convention / Requirements
-
 MakeSingleton
 
-+ (NSArray *)dailyPricesForStock:(int)stockId {
+#pragma mark - Helpers
+
+- (NSArray *)dailyPricesForStock:(int)stockId {
     id stockKey = [Stock keyForStockId:stockId];
     return [appData(stockPriceHistories) objectForKey:stockKey];
 }
 
-+ (int)daysAvailableForStockId:(int)stockId {
-    return [[[self class] dailyPricesForStock:stockId] count];
+- (int)daysAvailableForStockId:(int)stockId {
+    return [[self dailyPricesForStock:stockId] count];
 }
 
 #pragma mark - Price access
@@ -34,7 +34,7 @@ MakeSingleton
 }
 
 - (float)lastPriceForStockId:(int)stockId daysAgo:(int)daysAgo {
-    NSArray *dailyPrices = [[self class] dailyPricesForStock:stockId];;
+    NSArray *dailyPrices = [self dailyPricesForStock:stockId];;
     int dailyPricesCount = [dailyPrices count];
     
     NSArray *prices = nil;
@@ -48,7 +48,7 @@ MakeSingleton
 - (NSArray *)pricesOfStockId:(int)stockId startDaysAgo:(float)startTime endDaysAgo:(float)endTime {
     Assert(startTime < 0.f && endTime <= 0.f, @"Requesting prices in the future.");
     
-    NSArray *dailyPrices = [[self class] dailyPricesForStock:stockId];
+    NSArray *dailyPrices = [self dailyPricesForStock:stockId];
     int dailyPricesCount = [dailyPrices count];
     
     float startIndex = MAX(dailyPricesCount + startTime, 0);
@@ -59,25 +59,28 @@ MakeSingleton
     float endOffset = 1.f - (endIndexCeiling - endIndex);
     
     NSArray *startPrices = [dailyPrices objectAtIndex:(int)startIndex];
+    NSArray *endPrices = [dailyPrices objectAtIndex:(endIndexCeiling - 1)];
     int startPricesCount = [startPrices count];
-    NSRange startRange;
-    startRange.location = startPricesCount * startOffset;
-    startRange.length = startPricesCount - startRange.location;
+    BOOL startEndOverlap = ((int)startIndex >= endIndexCeiling - 1);
+    
+    NSRange range;
+    range.location = startPricesCount * startOffset;
+    range.length = startPricesCount - range.location;
+    if (startEndOverlap) {
+        range.length = [endPrices count] * endOffset - range.location;
+    }
     
     NSMutableArray *prices = [NSMutableArray array];
-    [prices addObjectsFromArray:[startPrices subarrayWithRange:startRange]];
+    [prices addObjectsFromArray:[startPrices subarrayWithRange:range]];
     
-    for (int i = startIndex + 1; i < endIndex - 1; i++) {
+    for (int i = startIndex + 1; i < endIndexCeiling - 1; i++) {
         [prices addObjectsFromArray:[dailyPrices objectAtIndex:i]];
     }
     
-    if ((int)startIndex < (int)endIndex - 1) {
-        NSArray *endPrices = [dailyPrices objectAtIndex:(endIndexCeiling - 1)];
-        NSRange endRange;
-        endRange.location = 0;
-        endRange.length = [endPrices count] * endOffset;
-        
-        [prices addObjectsFromArray:[endPrices subarrayWithRange:endRange]];
+    if (!startEndOverlap) {
+        range.location = 0;
+        range.length = [endPrices count] * endOffset;
+        [prices addObjectsFromArray:[endPrices subarrayWithRange:range]];
     }
     
     return prices;

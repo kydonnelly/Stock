@@ -24,8 +24,11 @@
 #import "StockPriceManager.h"
 #import "StockSelectionViewController.h"
 
+static const int kMaxGraphPoints = 500;
 static const double kDefaultDaysShown = 1.0f;
 static const double kMinTimePeriodShown = 1.f;
+
+static const float kPanDampeningFactor = 0.01f;
 
 @interface PriceGraphViewController () <IndicatorDatasource, UIGestureRecognizerDelegate>
 
@@ -46,6 +49,8 @@ static const double kMinTimePeriodShown = 1.f;
 
 @property (nonatomic) float lastScale;
 @property (nonatomic) float initialScalingAmount;
+
+@property (nonatomic) float lastPan;
 
 - (NSMutableSet *)activeIndicatorsOfType:(IndicatorType)indicatorType;
 
@@ -105,6 +110,7 @@ RegisterWithCallCenter
     self.lastClosePrice = [GET(StockPriceManager) lastPriceForStockId:self.stock.stockId daysAgo:1];
     self.displayedStartTime = -1 * kDefaultDaysShown;
     self.displayedEndTime = 0;
+    [self sanitizeDisplayEndpoints];
 }
 
 - (void)setupOutlets {
@@ -112,9 +118,11 @@ RegisterWithCallCenter
     [self.favoriteButton setImage:[UIImage imageNamed:FAVORITE_OFF_IMAGE] forState:UIControlStateNormal];
     
     UIPinchGestureRecognizer *pinch = [[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(handleGraphPinched:)] autorelease];
-    [pinch setDelegate:self];
-    [pinch setDelaysTouchesBegan:YES];
-    [self.graphView addGestureRecognizer:pinch];
+    [self addGestureRecognizer:pinch];
+    
+    UIPanGestureRecognizer *pan = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGraphPan:)] autorelease];
+    [self addGestureRecognizer:pan];
+    
     [self.graphView setIndicatorDatasource:self];
     
     [self.optionsSliderView setupWithDatasource:self];
@@ -147,7 +155,9 @@ RegisterWithCallCenter
 - (void)refreshGraphView {
     float minPrice = FLT_MAX;
     float maxPrice = 0.f;
+    
     NSArray *prices = [GET(StockPriceManager) pricesOfStockId:self.stock.stockId startDaysAgo:self.displayedStartTime endDaysAgo:self.displayedEndTime];
+    prices = [self trimmedPricesForCurrentDisplay:prices];
     
     for (Indicator *primaryIndicator in self.primaryIndicators) {
         [primaryIndicator setupWithPrices:prices];
@@ -165,6 +175,58 @@ RegisterWithCallCenter
 
 - (void)refreshOptionsSlider {
     // todo: might be better UX to revert selections to default indicators
+}
+
+#pragma mark - Display Sanity
+
+- (void)sanitizeDisplayEndpoints {
+    int daysAvailable = [GET(StockPriceManager) daysAvailableForStockId:self.stock.stockId];
+    int minEndTime = -1 * daysAvailable + kMinTimePeriodShown;
+    int maxEndTime = 0;
+    
+    if (self.displayedEndTime < minEndTime) {
+        self.displayedEndTime = minEndTime;
+    } else if (self.displayedEndTime > maxEndTime) {
+        self.displayedEndTime = maxEndTime;
+    }
+    
+    int minStartTime = -1 * daysAvailable;
+    int maxStartTime = self.displayedEndTime - kMinTimePeriodShown;
+    
+    if (self.displayedStartTime < minStartTime) {
+        self.displayedStartTime = minStartTime;
+    } else if (self.displayedStartTime > maxStartTime) {
+        self.displayedStartTime = maxStartTime;
+    }
+    
+    AssertWithFormat(minStartTime <= maxStartTime && minEndTime <= maxEndTime,
+                     @"Not enough price history to display %.2f days.", kMinTimePeriodShown);
+}
+
+- (NSArray *)trimmedPricesForCurrentDisplay:(NSArray *)originalPrices {
+    NSMutableArray *trimmedPrices = [NSMutableArray array];
+    
+    int pricesCount = [originalPrices count];
+    float xScale = (self.displayedEndTime - self.displayedStartTime) / pricesCount;
+    float endTimeOffset = ceilf(ABS(self.displayedEndTime)) - ABS(self.displayedEndTime);
+    
+    int removalMod = pricesCount / kMaxGraphPoints;
+    int offsetMod = removalMod + 1;
+    
+    int zoomOffset = pricesCount % offsetMod;
+    int slideOffset = (int)ceil(endTimeOffset / xScale) % offsetMod;
+    int removalCounter = (removalMod * 2 - zoomOffset - slideOffset) % offsetMod;
+    
+    for (NSNumber *priceNumber in originalPrices) {
+        if (removalCounter < removalMod) {
+            removalCounter++;
+        } else {
+            removalCounter = 0;
+            [trimmedPrices addObject:priceNumber];
+        }
+    }
+    
+    return trimmedPrices;
 }
 
 #pragma mark - Actions
@@ -204,6 +266,12 @@ RegisterWithCallCenter
 
 #pragma mark - Gesture Recognizers
 
+- (void)addGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
+    [gestureRecognizer setDelegate:self];
+    [gestureRecognizer setDelaysTouchesBegan:YES];
+    [self.graphView addGestureRecognizer:gestureRecognizer];
+}
+
 - (void)handleGraphPinched:(UIPinchGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         self.lastScale = 1.f;
@@ -214,17 +282,24 @@ RegisterWithCallCenter
     self.lastScale = gestureRecognizer.scale;
     
     self.displayedStartTime += self.initialScalingAmount * (scale - 1.f);
-        
-    int minStartTime = -1 * [StockPriceManager daysAvailableForStockId:self.stock.stockId];
-    int maxStartTime = self.displayedEndTime - kMinTimePeriodShown;
-    AssertWithFormat(minStartTime < maxStartTime, @"Not enough price history to display %.2f days.", kMinTimePeriodShown);
     
-    if (self.displayedStartTime < minStartTime) {
-        self.displayedStartTime = minStartTime;
-    } else if (self.displayedStartTime > maxStartTime) {
-        self.displayedStartTime = maxStartTime;
+    [self sanitizeDisplayEndpoints];
+    [self refreshGraphView];
+}
+
+- (void)handleGraphPan:(UIPanGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        self.lastPan = 0;
     }
     
+    float pan = [gestureRecognizer translationInView:self.graphView].x * kPanDampeningFactor;
+    float delta = pan - self.lastPan;
+    self.lastPan = pan;
+    
+    self.displayedStartTime -= delta;
+    self.displayedEndTime -= delta;
+    
+    [self sanitizeDisplayEndpoints];
     [self refreshGraphView];
 }
 

@@ -10,7 +10,7 @@
 
 @interface StockPriceManager : NSObject <Singleton>
 
-+ (int)daysAvailableForStockId:(int)stockId;
+- (int)daysAvailableForStockId:(int)stockId;
 
 - (float)priceForStockId:(int)stockId;
 - (float)lastPriceForStockId:(int)stockId daysAgo:(int)daysAgo;

@@ -99,8 +99,7 @@ typedef struct {
     
     CGFloat xScale = self.frame.size.width / (maxX - minX);
     CGFloat yScale = self.frame.size.height / (maxY - minY);
-
-    self.axisValue = (maxY - axisY) / (maxY - minY) * self.frame.size.height;
+    
     self.xStepInfo = [self stepForValuesFrom:minX
                                           to:maxX
                                     numSteps:HORIZONTAL_SECTIONS
@@ -112,6 +111,7 @@ typedef struct {
     
     self.minY = minY;
     self.maxY = maxY;
+    self.axisValue = (maxY - axisY) / (maxY - minY) * self.frame.size.height;
     
     [self setNeedsDisplay];
 }
@@ -232,13 +232,15 @@ typedef struct {
         
         NSArray *prices = [indicator allPrices];
         
-        CGFloat x = 0;
         CGFloat xStep = self.frame.size.width / [prices count];
         CGFloat frameHeight = self.frame.size.height;
         CGFloat yScale = frameHeight / (self.maxY - self.minY);
         
+        CGFloat x = 0;
+        CGFloat y = frameHeight - ([[prices firstObject] floatValue] - self.minY) * yScale;
+        
         CGContextBeginPath(context);
-        CGContextMoveToPoint(context, x, [[prices firstObject] floatValue]);
+        CGContextMoveToPoint(context, x, y);
         
         for (NSNumber *yNumber in prices) {
             CGFloat y = frameHeight - ([yNumber floatValue] - self.minY) * yScale;

@@ -243,7 +243,7 @@ typedef struct {
         CGContextMoveToPoint(context, x, y);
         
         for (NSNumber *yNumber in prices) {
-            CGFloat y = frameHeight - ([yNumber floatValue] - self.minY) * yScale;
+            y = frameHeight - ([yNumber floatValue] - self.minY) * yScale;
             
             CGContextAddLineToPoint(context, x, y);
             CGContextMoveToPoint(context, x, y);

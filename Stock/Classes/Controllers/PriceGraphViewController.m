@@ -24,6 +24,9 @@
 #import "StockPriceManager.h"
 #import "StockSelectionViewController.h"
 
+static const double kDefaultDaysShown = 1.0f;
+static const double kMinTimePeriodShown = 1.f;
+
 @interface PriceGraphViewController () <IndicatorDatasource, UIGestureRecognizerDelegate>
 
 @property (nonatomic, retain) IBOutlet GraphView *graphView;
@@ -40,6 +43,9 @@
 
 @property (nonatomic, retain) NSMutableSet *primaryIndicators;
 @property (nonatomic, retain) NSMutableSet *secondaryIndicators;
+
+@property (nonatomic) float lastScale;
+@property (nonatomic) float initialScalingAmount;
 
 - (NSMutableSet *)activeIndicatorsOfType:(IndicatorType)indicatorType;
 
@@ -97,7 +103,7 @@ RegisterWithCallCenter
     }
     
     self.lastClosePrice = [GET(StockPriceManager) lastPriceForStockId:self.stock.stockId daysAgo:1];
-    self.displayedStartTime = -1;
+    self.displayedStartTime = -1 * kDefaultDaysShown;
     self.displayedEndTime = 0;
 }
 
@@ -141,7 +147,7 @@ RegisterWithCallCenter
 - (void)refreshGraphView {
     float minPrice = FLT_MAX;
     float maxPrice = 0.f;
-    NSArray *prices = [GET(StockPriceManager) pricesOfStockId:self.stock.stockId startTime:self.displayedStartTime endTime:self.displayedEndTime];
+    NSArray *prices = [GET(StockPriceManager) pricesOfStockId:self.stock.stockId startDaysAgo:self.displayedStartTime endDaysAgo:self.displayedEndTime];
     
     for (Indicator *primaryIndicator in self.primaryIndicators) {
         [primaryIndicator setupWithPrices:prices];
@@ -196,30 +202,29 @@ RegisterWithCallCenter
     [self refresh];
 }
 
-// todo
-#pragma mark - Gesture Recognizer delegate methods
+#pragma mark - Gesture Recognizers
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return NO;
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    return NO;
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return NO;
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return NO;
-}
-
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    return NO;
-}
-
-- (void)handleGraphPinched:(UIGestureRecognizer *)gestureRecognizer {
+- (void)handleGraphPinched:(UIPinchGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        self.lastScale = 1.f;
+        self.initialScalingAmount = self.displayedEndTime - self.displayedStartTime;
+    }
+    
+    float scale = gestureRecognizer.scale / self.lastScale;
+    self.lastScale = gestureRecognizer.scale;
+    
+    self.displayedStartTime += self.initialScalingAmount * (scale - 1.f);
+        
+    int minStartTime = -1 * [StockPriceManager daysAvailableForStockId:self.stock.stockId];
+    int maxStartTime = self.displayedEndTime - kMinTimePeriodShown;
+    AssertWithFormat(minStartTime < maxStartTime, @"Not enough price history to display %.2f days.", kMinTimePeriodShown);
+    
+    if (self.displayedStartTime < minStartTime) {
+        self.displayedStartTime = minStartTime;
+    } else if (self.displayedStartTime > maxStartTime) {
+        self.displayedStartTime = maxStartTime;
+    }
+    
     [self refreshGraphView];
 }
 

@@ -16,7 +16,7 @@
 
 #define Assert(condition, failMessage) AssertWithFormat(condition, failMessage)
 #define AssertWithFormat(condition, failMessage, ...) \
-if (!condition) {\
+if (!(condition)) {\
     [[[[UIAlertView alloc] initWithTitle:@"Assertion Failure" message:[NSString stringWithFormat:failMessage, ##__VA_ARGS__] delegate:nil cancelButtonTitle:@"continue" otherButtonTitles:nil] autorelease] show];\
 }
 

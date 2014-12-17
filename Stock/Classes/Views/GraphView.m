@@ -11,10 +11,10 @@
 #import "ClassUtils.h"
 #import "Indicator.h"
 
-#define VERTICAL_SECTIONS 5
-#define HORIZONTAL_SECTIONS 4
-#define VERTICAL_BUFFER .05f
-#define TEXT_SIZE 12
+static const int kVerticalSections = 5;
+static const int kHorizontalSections = 4;
+static const CGFloat kVerticalBuffer = .05f;
+static const int kLabelTextSize = 12;
 
 typedef struct {
     CGFloat step;
@@ -93,7 +93,7 @@ typedef struct {
 }
 
 - (void)setMinX:(float)minX maxX:(float)maxX minY:(float)minY maxY:(float)maxY axisY:(float)axisY {
-    CGFloat yBuffer = (maxY - minY) * VERTICAL_BUFFER;
+    CGFloat yBuffer = (maxY - minY) * kVerticalBuffer;
     maxY += yBuffer;
     minY -= yBuffer;
     
@@ -102,11 +102,11 @@ typedef struct {
     
     self.xStepInfo = [self stepForValuesFrom:minX
                                           to:maxX
-                                    numSteps:HORIZONTAL_SECTIONS
+                                    numSteps:kHorizontalSections
                                 contextScale:xScale];
     self.yStepInfo = [self stepForValuesFrom:minY
                                           to:maxY
-                                    numSteps:VERTICAL_SECTIONS
+                                    numSteps:kVerticalSections
                                 contextScale:yScale];
     
     self.minY = minY;
@@ -155,7 +155,7 @@ typedef struct {
     
     CGFloat xPos = self.xStepInfo.drawingStepInfo.stepStart;
     CGFloat height = self.frame.size.height;
-    for (int i = 0; i < HORIZONTAL_SECTIONS; i++) {
+    for (int i = 0; i < kHorizontalSections; i++) {
         CGContextMoveToPoint(context, xPos, 0);
         CGContextAddLineToPoint(context, xPos, height);
         
@@ -187,7 +187,7 @@ typedef struct {
     NSString *text = [NSString stringWithFormat:format, value];
     
     CGRect textRect;
-    NSDictionary *fontAttributes = [NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:TEXT_SIZE] forKey:NSFontAttributeName];
+    NSDictionary *fontAttributes = [NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:kLabelTextSize] forKey:NSFontAttributeName];
     
     textRect.size = [text sizeWithAttributes:fontAttributes];
     textRect.origin.x = x;
@@ -201,7 +201,7 @@ typedef struct {
     float xValue = self.xStepInfo.displayStepInfo.stepStart;
     CGFloat height = self.frame.size.height;
     
-    for (int i = 0; i < HORIZONTAL_SECTIONS; i++) {
+    for (int i = 0; i < kHorizontalSections; i++) {
         [self drawNumberText:xValue decimalPrecision:self.xStepInfo.displayPrecision x:xPos y:height];
         
         xPos += self.xStepInfo.drawingStepInfo.step;
@@ -213,7 +213,7 @@ typedef struct {
     CGFloat yPosition = self.frame.size.height - self.yStepInfo.drawingStepInfo.stepStart;
     float yValue = self.yStepInfo.displayStepInfo.stepStart;
     
-    for (int i = 0; i < VERTICAL_SECTIONS; i++) {
+    for (int i = 0; i < kVerticalSections; i++) {
         [self drawNumberText:yValue decimalPrecision:self.yStepInfo.displayPrecision x:0 y:yPosition];
         
         yPosition -= self.yStepInfo.drawingStepInfo.step;

@@ -12,7 +12,7 @@
 #import "AppData.h"
 #import "Stock.h"
 
-#define RECENTLY_VIEWED_QUEUE_SIZE 5
+static const int kRecentlyViewedQueueSize = 5;
 
 @interface StockListManager ()
 
@@ -157,7 +157,7 @@ MakeSingleton
     
     if (![stockKeys containsObject:stockKey]) {
         [stockKeys insertObject:stockKey atIndex:0];
-        while ([stockKeys count] > RECENTLY_VIEWED_QUEUE_SIZE) {
+        while ([stockKeys count] > kRecentlyViewedQueueSize) {
             [stockKeys removeLastObject];
         }
     }

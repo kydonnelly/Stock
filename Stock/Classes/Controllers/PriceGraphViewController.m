@@ -18,6 +18,7 @@
 #import "IndicatorDatasource+Protocol.h"
 #import "IndicatorListSliderView.h"
 #import "MasterViewController.h"
+#import "PriceDetailView.h"
 #import "StockPriceIndicator.h"
 #import "Stock.h"
 #import "StockListManager.h"
@@ -36,6 +37,8 @@ static const float kPanDampeningFactor = 0.01f;
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic, retain) IBOutlet ExtendedStateButton *favoriteButton;
 @property (nonatomic, retain) IBOutlet IndicatorListSliderView *optionsSliderView;
+
+@property (nonatomic, retain) PriceDetailView *priceDetailView;
 
 @property (nonatomic, retain) Stock *stock;
 @property (nonatomic) StockSelectionCategory stockCategory;
@@ -87,6 +90,8 @@ RegisterWithCallCenter
     ReleaseIvar(_favoriteButton);
     ReleaseIvar(_optionsSliderView);
     
+    ReleaseIvar(_priceDetailView);
+    
     ReleaseIvar(_stock);
     
     ReleaseIvar(_primaryIndicators);
@@ -123,6 +128,9 @@ RegisterWithCallCenter
     UIPanGestureRecognizer *pan = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleGraphPan:)] autorelease];
     [self addGestureRecognizer:pan];
     
+    UILongPressGestureRecognizer *hold = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleGraphHold:)] autorelease];
+    [self addGestureRecognizer:hold];
+    
     [self.graphView setIndicatorDatasource:self];
     
     [self.optionsSliderView setupWithDatasource:self];
@@ -145,6 +153,7 @@ RegisterWithCallCenter
     [self refreshFavoriteButton];
     [self refreshOptionsSlider];
     [self refreshGraphView];
+    [self refreshPriceDetailView];
 }
 
 - (void)refreshFavoriteButton {
@@ -175,6 +184,10 @@ RegisterWithCallCenter
 
 - (void)refreshOptionsSlider {
     // todo: might be better UX to revert selections to default indicators
+}
+
+- (void)refreshPriceDetailView {
+    [self.priceDetailView refresh];
 }
 
 #pragma mark - Display Sanity
@@ -301,6 +314,28 @@ RegisterWithCallCenter
     
     [self sanitizeDisplayEndpoints];
     [self refreshGraphView];
+}
+
+- (void)handleGraphHold:(UILongPressGestureRecognizer *)gestureRecognizer {
+    switch (gestureRecognizer.state) {
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateFailed:
+            [self.priceDetailView removeFromSuperview];
+            self.priceDetailView = nil;
+            return;
+        default:
+            break;
+    }
+    
+    if (!self.priceDetailView) {
+        self.priceDetailView = [[[PriceDetailView alloc] init] autorelease];
+        [self.priceDetailView setupWithDatasource:self];
+        [self.view addSubview:self.priceDetailView];
+    }
+    
+    CGPoint holdPoint = [gestureRecognizer locationInView:self.graphView];
+    [self.priceDetailView setPosition:holdPoint inBounds:self.graphView.frame];
 }
 
 @end

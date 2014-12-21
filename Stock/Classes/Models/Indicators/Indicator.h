@@ -21,12 +21,13 @@
 
 - (void)setupWithPrices:(NSArray *)prices;
 
-- (NSArray *)allPrices;
+- (IndicatorType)indicatorType;
 
+- (NSArray *)allPrices;
 - (float)minPrice;
 - (float)maxPrice;
 
-- (IndicatorType)indicatorType;
+- (NSString *)displayDetailsAtPriceIndex:(int)index;
 - (NSString *)displayName;
 - (UIColor *)displayColor;
 - (float)lineWidth;

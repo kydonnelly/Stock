@@ -23,6 +23,10 @@
 
 #pragma mark - Lifecycle
 
+- (IndicatorType)indicatorType {
+    return IndicatorTypePrimary;
+}
+
 - (void)dealloc {
     ReleaseIvar(_prices);
     
@@ -61,8 +65,9 @@
     return self.prices;
 }
 
-- (IndicatorType)indicatorType {
-    return IndicatorTypePrimary;
+- (NSString *)displayDetailsAtPriceIndex:(int)index {
+    // todo: variable display precision as in graph view
+    return [NSString stringWithFormat:@"%.2f", [[self.prices objectAtIndex:index] floatValue]];
 }
 
 - (NSString *)displayName {

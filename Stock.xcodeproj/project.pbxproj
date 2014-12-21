@@ -12,7 +12,6 @@
 		271EA3DE1A303A87001BE9D2 /* PriceGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271EA3DD1A303A87001BE9D2 /* PriceGraphViewController.xib */; };
 		274651C61A3EC15F0094748C /* MovingAverageIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 274651C31A3EC15F0094748C /* MovingAverageIndicator.m */; };
 		274651C71A3EC15F0094748C /* SimpleMovingAverageIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 274651C51A3EC15F0094748C /* SimpleMovingAverageIndicator.m */; };
-		275847991A33BFD0008F733F /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 275847981A33BFD0008F733F /* GraphView.m */; };
 		276B1D811A2A6A4300B7EF9F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276B1D801A2A6A4300B7EF9F /* Foundation.framework */; };
 		276B1D831A2A6A4300B7EF9F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276B1D821A2A6A4300B7EF9F /* CoreGraphics.framework */; };
 		276B1D851A2A6A4300B7EF9F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276B1D841A2A6A4300B7EF9F /* UIKit.framework */; };
@@ -25,27 +24,34 @@
 		276B1D9C1A2A6A4300B7EF9F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276B1D841A2A6A4300B7EF9F /* UIKit.framework */; };
 		276B1DA41A2A6A4300B7EF9F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 276B1DA21A2A6A4300B7EF9F /* InfoPlist.strings */; };
 		276B1DA61A2A6A4300B7EF9F /* StockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 276B1DA51A2A6A4300B7EF9F /* StockTests.m */; };
-		2781F8A81A3E9B7D00011A14 /* IndicatorListSliderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2781F8A61A3E9B7D00011A14 /* IndicatorListSliderTableViewCell.m */; };
+		2780477E1A46773100676EB3 /* ExtendedStateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 278047691A46773100676EB3 /* ExtendedStateButton.m */; };
+		2780477F1A46773100676EB3 /* IndicatorDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2780476C1A46773100676EB3 /* IndicatorDetailTableViewCell.m */; };
+		278047801A46773100676EB3 /* IndicatorListSliderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2780476E1A46773100676EB3 /* IndicatorListSliderTableViewCell.m */; };
+		278047811A46773100676EB3 /* StockSelectionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 278047701A46773100676EB3 /* StockSelectionTableView.m */; };
+		278047821A46773100676EB3 /* StockSelectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 278047721A46773100676EB3 /* StockSelectionTableViewCell.m */; };
+		278047831A46773100676EB3 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 278047751A46773100676EB3 /* GraphView.m */; };
+		278047841A46773100676EB3 /* IndicatorListSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 278047771A46773100676EB3 /* IndicatorListSliderView.m */; };
+		278047851A46773100676EB3 /* PriceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 278047791A46773100676EB3 /* PriceDetailView.m */; };
+		278047861A46773100676EB3 /* SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2780477B1A46773100676EB3 /* SliderView.m */; };
+		278047871A46773100676EB3 /* XibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2780477D1A46773100676EB3 /* XibView.m */; };
+		2780478A1A46780600676EB3 /* TriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 278047891A46780600676EB3 /* TriangleView.m */; };
 		2781F8AB1A3E9BAB00011A14 /* IndicatorListSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2781F8AA1A3E9BAB00011A14 /* IndicatorListSliderTableViewCell.xib */; };
 		27A7FF501A2B23FF00BF2DDA /* favorite_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 27A7FF4E1A2B23FF00BF2DDA /* favorite_on.png */; };
 		27A7FF511A2B23FF00BF2DDA /* favorite_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 27A7FF4F1A2B23FF00BF2DDA /* favorite_off.png */; };
-		27A7FF541A2B2D6C00BF2DDA /* ExtendedStateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A7FF531A2B2D6C00BF2DDA /* ExtendedStateButton.m */; };
 		27B958FD1A2AA39400AA08BA /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B958FC1A2AA39400AA08BA /* MasterViewController.m */; };
 		27B959001A2AB3A800AA08BA /* CallCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B958FF1A2AB3A800AA08BA /* CallCenter.m */; };
 		27B959071A2AC43600AA08BA /* StockSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B959051A2AC43600AA08BA /* StockSelectionViewController.m */; };
 		27B9590B1A2AC47A00AA08BA /* StockSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B9590A1A2AC47A00AA08BA /* StockSelectionViewController.xib */; };
-		27B9590E1A2AC55500AA08BA /* StockSelectionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B9590D1A2AC55500AA08BA /* StockSelectionTableView.m */; };
 		27B959141A2AC97B00AA08BA /* Stock.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B959131A2AC97B00AA08BA /* Stock.m */; };
-		27B959181A2AD0AC00AA08BA /* StockSelectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B959161A2AD0AC00AA08BA /* StockSelectionTableViewCell.m */; };
 		27B9591B1A2AD0C700AA08BA /* StockSelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B9591A1A2AD0C700AA08BA /* StockSelectionTableViewCell.xib */; };
 		27B9591E1A2ADEB600AA08BA /* LocalizationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B9591D1A2ADEB600AA08BA /* LocalizationHelper.m */; };
 		27B959221A2AE9F900AA08BA /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B959211A2AE9F900AA08BA /* AppData.m */; };
 		27BC33561A3D917C003A085F /* Indicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BC33551A3D917C003A085F /* Indicator.m */; };
 		27BEE9F61A3EC27F007225E2 /* ExponentialMovingAverageIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BEE9F51A3EC27F007225E2 /* ExponentialMovingAverageIndicator.m */; };
+		27C073DE1A46549E00D39597 /* PriceDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27C073DD1A46549E00D39597 /* PriceDetailView.xib */; };
+		27C073E81A4667C700D39597 /* IndicatorDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27C073E71A4667C700D39597 /* IndicatorDetailTableViewCell.xib */; };
 		27DA548E1A2C263200F926B8 /* StockListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DA548D1A2C263200F926B8 /* StockListManager.m */; };
 		27DA54911A2C266900F926B8 /* StockPriceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DA54901A2C266900F926B8 /* StockPriceManager.m */; };
-		27E4C4921A3E79520079B803 /* SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E4C4911A3E79520079B803 /* SliderView.m */; };
-		27E4C4951A3E95120079B803 /* IndicatorListSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E4C4941A3E95120079B803 /* IndicatorListSliderView.m */; };
 		27E4C4981A3E96540079B803 /* IndicatorList.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E4C4971A3E96540079B803 /* IndicatorList.m */; };
 /* End PBXBuildFile section */
 
@@ -72,8 +78,6 @@
 		274651C41A3EC15F0094748C /* SimpleMovingAverageIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleMovingAverageIndicator.h; sourceTree = "<group>"; };
 		274651C51A3EC15F0094748C /* SimpleMovingAverageIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleMovingAverageIndicator.m; sourceTree = "<group>"; };
 		274651C81A3EC17D0094748C /* MovingAverageIndicator+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MovingAverageIndicator+Protected.h"; sourceTree = "<group>"; };
-		275847971A33BFD0008F733F /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
-		275847981A33BFD0008F733F /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
 		276B1D7D1A2A6A4300B7EF9F /* Stock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		276B1D801A2A6A4300B7EF9F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		276B1D821A2A6A4300B7EF9F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -90,13 +94,31 @@
 		276B1DA11A2A6A4300B7EF9F /* StockTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StockTests-Info.plist"; sourceTree = "<group>"; };
 		276B1DA31A2A6A4300B7EF9F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		276B1DA51A2A6A4300B7EF9F /* StockTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StockTests.m; sourceTree = "<group>"; };
-		2781F8A51A3E9B7D00011A14 /* IndicatorListSliderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorListSliderTableViewCell.h; sourceTree = "<group>"; };
-		2781F8A61A3E9B7D00011A14 /* IndicatorListSliderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorListSliderTableViewCell.m; sourceTree = "<group>"; };
+		278047681A46773100676EB3 /* ExtendedStateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedStateButton.h; sourceTree = "<group>"; };
+		278047691A46773100676EB3 /* ExtendedStateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedStateButton.m; sourceTree = "<group>"; };
+		2780476B1A46773100676EB3 /* IndicatorDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorDetailTableViewCell.h; sourceTree = "<group>"; };
+		2780476C1A46773100676EB3 /* IndicatorDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorDetailTableViewCell.m; sourceTree = "<group>"; };
+		2780476D1A46773100676EB3 /* IndicatorListSliderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorListSliderTableViewCell.h; sourceTree = "<group>"; };
+		2780476E1A46773100676EB3 /* IndicatorListSliderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorListSliderTableViewCell.m; sourceTree = "<group>"; };
+		2780476F1A46773100676EB3 /* StockSelectionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockSelectionTableView.h; sourceTree = "<group>"; };
+		278047701A46773100676EB3 /* StockSelectionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockSelectionTableView.m; sourceTree = "<group>"; };
+		278047711A46773100676EB3 /* StockSelectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockSelectionTableViewCell.h; sourceTree = "<group>"; };
+		278047721A46773100676EB3 /* StockSelectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockSelectionTableViewCell.m; sourceTree = "<group>"; };
+		278047741A46773100676EB3 /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		278047751A46773100676EB3 /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
+		278047761A46773100676EB3 /* IndicatorListSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorListSliderView.h; sourceTree = "<group>"; };
+		278047771A46773100676EB3 /* IndicatorListSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorListSliderView.m; sourceTree = "<group>"; };
+		278047781A46773100676EB3 /* PriceDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceDetailView.h; sourceTree = "<group>"; };
+		278047791A46773100676EB3 /* PriceDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceDetailView.m; sourceTree = "<group>"; };
+		2780477A1A46773100676EB3 /* SliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderView.h; sourceTree = "<group>"; };
+		2780477B1A46773100676EB3 /* SliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderView.m; sourceTree = "<group>"; };
+		2780477C1A46773100676EB3 /* XibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XibView.h; sourceTree = "<group>"; };
+		2780477D1A46773100676EB3 /* XibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XibView.m; sourceTree = "<group>"; };
+		278047881A46780600676EB3 /* TriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleView.h; sourceTree = "<group>"; };
+		278047891A46780600676EB3 /* TriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleView.m; sourceTree = "<group>"; };
 		2781F8AA1A3E9BAB00011A14 /* IndicatorListSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndicatorListSliderTableViewCell.xib; sourceTree = "<group>"; };
 		27A7FF4E1A2B23FF00BF2DDA /* favorite_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite_on.png; sourceTree = "<group>"; };
 		27A7FF4F1A2B23FF00BF2DDA /* favorite_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite_off.png; sourceTree = "<group>"; };
-		27A7FF521A2B2D6C00BF2DDA /* ExtendedStateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedStateButton.h; sourceTree = "<group>"; };
-		27A7FF531A2B2D6C00BF2DDA /* ExtendedStateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedStateButton.m; sourceTree = "<group>"; };
 		27B958FB1A2AA39400AA08BA /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		27B958FC1A2AA39400AA08BA /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		27B958FE1A2AB3A800AA08BA /* CallCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallCenter.h; sourceTree = "<group>"; };
@@ -105,12 +127,8 @@
 		27B959041A2AC43600AA08BA /* StockSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockSelectionViewController.h; sourceTree = "<group>"; };
 		27B959051A2AC43600AA08BA /* StockSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockSelectionViewController.m; sourceTree = "<group>"; };
 		27B9590A1A2AC47A00AA08BA /* StockSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StockSelectionViewController.xib; sourceTree = "<group>"; };
-		27B9590C1A2AC55500AA08BA /* StockSelectionTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockSelectionTableView.h; sourceTree = "<group>"; };
-		27B9590D1A2AC55500AA08BA /* StockSelectionTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockSelectionTableView.m; sourceTree = "<group>"; };
 		27B959121A2AC97B00AA08BA /* Stock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stock.h; sourceTree = "<group>"; };
 		27B959131A2AC97B00AA08BA /* Stock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stock.m; sourceTree = "<group>"; };
-		27B959151A2AD0AC00AA08BA /* StockSelectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockSelectionTableViewCell.h; sourceTree = "<group>"; };
-		27B959161A2AD0AC00AA08BA /* StockSelectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockSelectionTableViewCell.m; sourceTree = "<group>"; };
 		27B9591A1A2AD0C700AA08BA /* StockSelectionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StockSelectionTableViewCell.xib; sourceTree = "<group>"; };
 		27B9591C1A2ADEB600AA08BA /* LocalizationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizationHelper.h; sourceTree = "<group>"; };
 		27B9591D1A2ADEB600AA08BA /* LocalizationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizationHelper.m; sourceTree = "<group>"; };
@@ -123,14 +141,12 @@
 		27BC33551A3D917C003A085F /* Indicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Indicator.m; sourceTree = "<group>"; };
 		27BEE9F41A3EC27F007225E2 /* ExponentialMovingAverageIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExponentialMovingAverageIndicator.h; sourceTree = "<group>"; };
 		27BEE9F51A3EC27F007225E2 /* ExponentialMovingAverageIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExponentialMovingAverageIndicator.m; sourceTree = "<group>"; };
+		27C073DD1A46549E00D39597 /* PriceDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceDetailView.xib; sourceTree = "<group>"; };
+		27C073E71A4667C700D39597 /* IndicatorDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndicatorDetailTableViewCell.xib; sourceTree = "<group>"; };
 		27DA548C1A2C263200F926B8 /* StockListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockListManager.h; sourceTree = "<group>"; };
 		27DA548D1A2C263200F926B8 /* StockListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockListManager.m; sourceTree = "<group>"; };
 		27DA548F1A2C266900F926B8 /* StockPriceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockPriceManager.h; sourceTree = "<group>"; };
 		27DA54901A2C266900F926B8 /* StockPriceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockPriceManager.m; sourceTree = "<group>"; };
-		27E4C4901A3E79520079B803 /* SliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderView.h; sourceTree = "<group>"; };
-		27E4C4911A3E79520079B803 /* SliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderView.m; sourceTree = "<group>"; };
-		27E4C4931A3E95120079B803 /* IndicatorListSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorListSliderView.h; sourceTree = "<group>"; };
-		27E4C4941A3E95120079B803 /* IndicatorListSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorListSliderView.m; sourceTree = "<group>"; };
 		27E4C4961A3E96540079B803 /* IndicatorList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorList.h; sourceTree = "<group>"; };
 		27E4C4971A3E96540079B803 /* IndicatorList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorList.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -243,6 +259,49 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		278047671A46773100676EB3 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				278047681A46773100676EB3 /* ExtendedStateButton.h */,
+				278047691A46773100676EB3 /* ExtendedStateButton.m */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		2780476A1A46773100676EB3 /* Tables */ = {
+			isa = PBXGroup;
+			children = (
+				2780476B1A46773100676EB3 /* IndicatorDetailTableViewCell.h */,
+				2780476C1A46773100676EB3 /* IndicatorDetailTableViewCell.m */,
+				2780476D1A46773100676EB3 /* IndicatorListSliderTableViewCell.h */,
+				2780476E1A46773100676EB3 /* IndicatorListSliderTableViewCell.m */,
+				2780476F1A46773100676EB3 /* StockSelectionTableView.h */,
+				278047701A46773100676EB3 /* StockSelectionTableView.m */,
+				278047711A46773100676EB3 /* StockSelectionTableViewCell.h */,
+				278047721A46773100676EB3 /* StockSelectionTableViewCell.m */,
+			);
+			path = Tables;
+			sourceTree = "<group>";
+		};
+		278047731A46773100676EB3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				278047741A46773100676EB3 /* GraphView.h */,
+				278047751A46773100676EB3 /* GraphView.m */,
+				278047761A46773100676EB3 /* IndicatorListSliderView.h */,
+				278047771A46773100676EB3 /* IndicatorListSliderView.m */,
+				278047781A46773100676EB3 /* PriceDetailView.h */,
+				278047791A46773100676EB3 /* PriceDetailView.m */,
+				2780477A1A46773100676EB3 /* SliderView.h */,
+				2780477B1A46773100676EB3 /* SliderView.m */,
+				278047881A46780600676EB3 /* TriangleView.h */,
+				278047891A46780600676EB3 /* TriangleView.m */,
+				2780477C1A46773100676EB3 /* XibView.h */,
+				2780477D1A46773100676EB3 /* XibView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		27A7FF4D1A2B23FF00BF2DDA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,20 +369,9 @@
 		27B958F91A2AA2D400AA08BA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				27A7FF521A2B2D6C00BF2DDA /* ExtendedStateButton.h */,
-				27A7FF531A2B2D6C00BF2DDA /* ExtendedStateButton.m */,
-				275847971A33BFD0008F733F /* GraphView.h */,
-				275847981A33BFD0008F733F /* GraphView.m */,
-				27E4C4931A3E95120079B803 /* IndicatorListSliderView.h */,
-				27E4C4941A3E95120079B803 /* IndicatorListSliderView.m */,
-				2781F8A51A3E9B7D00011A14 /* IndicatorListSliderTableViewCell.h */,
-				2781F8A61A3E9B7D00011A14 /* IndicatorListSliderTableViewCell.m */,
-				27E4C4901A3E79520079B803 /* SliderView.h */,
-				27E4C4911A3E79520079B803 /* SliderView.m */,
-				27B9590C1A2AC55500AA08BA /* StockSelectionTableView.h */,
-				27B9590D1A2AC55500AA08BA /* StockSelectionTableView.m */,
-				27B959151A2AD0AC00AA08BA /* StockSelectionTableViewCell.h */,
-				27B959161A2AD0AC00AA08BA /* StockSelectionTableViewCell.m */,
+				278047671A46773100676EB3 /* Buttons */,
+				2780476A1A46773100676EB3 /* Tables */,
+				278047731A46773100676EB3 /* Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -340,7 +388,9 @@
 		27B959091A2AC45600AA08BA /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				27C073E71A4667C700D39597 /* IndicatorDetailTableViewCell.xib */,
 				2781F8AA1A3E9BAB00011A14 /* IndicatorListSliderTableViewCell.xib */,
+				27C073DD1A46549E00D39597 /* PriceDetailView.xib */,
 				271EA3DD1A303A87001BE9D2 /* PriceGraphViewController.xib */,
 				27B9591A1A2AD0C700AA08BA /* StockSelectionTableViewCell.xib */,
 				27B9590A1A2AC47A00AA08BA /* StockSelectionViewController.xib */,
@@ -449,9 +499,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C073DE1A46549E00D39597 /* PriceDetailView.xib in Resources */,
 				271EA3DE1A303A87001BE9D2 /* PriceGraphViewController.xib in Resources */,
 				27A7FF511A2B23FF00BF2DDA /* favorite_off.png in Resources */,
 				276B1D8B1A2A6A4300B7EF9F /* InfoPlist.strings in Resources */,
+				27C073E81A4667C700D39597 /* IndicatorDetailTableViewCell.xib in Resources */,
 				27A7FF501A2B23FF00BF2DDA /* favorite_on.png in Resources */,
 				2781F8AB1A3E9BAB00011A14 /* IndicatorListSliderTableViewCell.xib in Resources */,
 				27B9591B1A2AD0C700AA08BA /* StockSelectionTableViewCell.xib in Resources */,
@@ -475,30 +527,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2780477E1A46773100676EB3 /* ExtendedStateButton.m in Sources */,
 				27B9591E1A2ADEB600AA08BA /* LocalizationHelper.m in Sources */,
 				271EA3DB1A303A49001BE9D2 /* PriceGraphViewController.m in Sources */,
+				278047811A46773100676EB3 /* StockSelectionTableView.m in Sources */,
 				27B959001A2AB3A800AA08BA /* CallCenter.m in Sources */,
 				27BC33561A3D917C003A085F /* Indicator.m in Sources */,
 				276B1D911A2A6A4300B7EF9F /* AppDelegate.m in Sources */,
 				27B959221A2AE9F900AA08BA /* AppData.m in Sources */,
 				27B958FD1A2AA39400AA08BA /* MasterViewController.m in Sources */,
-				275847991A33BFD0008F733F /* GraphView.m in Sources */,
-				27A7FF541A2B2D6C00BF2DDA /* ExtendedStateButton.m in Sources */,
-				27E4C4951A3E95120079B803 /* IndicatorListSliderView.m in Sources */,
-				27B9590E1A2AC55500AA08BA /* StockSelectionTableView.m in Sources */,
+				278047871A46773100676EB3 /* XibView.m in Sources */,
+				278047821A46773100676EB3 /* StockSelectionTableViewCell.m in Sources */,
 				274651C61A3EC15F0094748C /* MovingAverageIndicator.m in Sources */,
+				278047861A46773100676EB3 /* SliderView.m in Sources */,
+				278047841A46773100676EB3 /* IndicatorListSliderView.m in Sources */,
+				2780478A1A46780600676EB3 /* TriangleView.m in Sources */,
 				276B1D8D1A2A6A4300B7EF9F /* main.m in Sources */,
 				27BEE9F61A3EC27F007225E2 /* ExponentialMovingAverageIndicator.m in Sources */,
 				27DA548E1A2C263200F926B8 /* StockListManager.m in Sources */,
+				278047801A46773100676EB3 /* IndicatorListSliderTableViewCell.m in Sources */,
 				27B959141A2AC97B00AA08BA /* Stock.m in Sources */,
-				27E4C4921A3E79520079B803 /* SliderView.m in Sources */,
 				27E4C4981A3E96540079B803 /* IndicatorList.m in Sources */,
+				278047851A46773100676EB3 /* PriceDetailView.m in Sources */,
 				27DA54911A2C266900F926B8 /* StockPriceManager.m in Sources */,
 				27057E211A3D97BC0033F4EF /* StockPriceIndicator.m in Sources */,
+				278047831A46773100676EB3 /* GraphView.m in Sources */,
+				2780477F1A46773100676EB3 /* IndicatorDetailTableViewCell.m in Sources */,
 				274651C71A3EC15F0094748C /* SimpleMovingAverageIndicator.m in Sources */,
-				27B959181A2AD0AC00AA08BA /* StockSelectionTableViewCell.m in Sources */,
 				27B959071A2AC43600AA08BA /* StockSelectionViewController.m in Sources */,
-				2781F8A81A3E9B7D00011A14 /* IndicatorListSliderTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

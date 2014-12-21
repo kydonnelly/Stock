@@ -8,16 +8,17 @@
 
 #import "PriceGraphViewController.h"
 
+#import "AppData.h"
 #import "CallCenter.h"
 #import "ClassUtils.h"
 #import "DisplayUtils.h"
 #import "ExtendedStateButton.h"
-#import "AppData.h"
 #import "GraphView.h"
 #import "Indicator.h"
 #import "IndicatorDatasource+Protocol.h"
 #import "IndicatorListSliderView.h"
 #import "MasterViewController.h"
+#import "NSArray+Sorted.h"
 #import "PriceDetailView.h"
 #import "StockPriceIndicator.h"
 #import "Stock.h"
@@ -46,15 +47,15 @@ static const float kPanDampeningFactor = 0.01f;
 @property (nonatomic) float displayedEndTime;
 @property (nonatomic) float lastClosePrice;
 
-@property (nonatomic, retain) NSMutableSet *primaryIndicators;
-@property (nonatomic, retain) NSMutableSet *secondaryIndicators;
+@property (nonatomic, retain) NSMutableArray *primaryIndicators;
+@property (nonatomic, retain) NSMutableArray *secondaryIndicators;
 
 @property (nonatomic) float lastScale;
 @property (nonatomic) float initialScalingAmount;
 
 @property (nonatomic) float lastPan;
 
-- (NSMutableSet *)activeIndicatorsOfType:(IndicatorType)indicatorType;
+- (NSMutableArray *)activeIndicatorsOfType:(IndicatorType)indicatorType;
 
 @end
 
@@ -141,11 +142,11 @@ RegisterWithCallCenter
 }
 
 - (void)setupIndicators {
-    self.primaryIndicators = [NSMutableSet setWithObject:[[[StockPriceIndicator alloc] init] autorelease]];
-    self.secondaryIndicators = [NSMutableSet set];
+    self.primaryIndicators = [NSMutableArray arrayWithObject:[[[StockPriceIndicator alloc] init] autorelease]];
+    self.secondaryIndicators = [NSMutableArray array];
     
     for (Indicator *indicator in appData(defaultIndicators)) {
-        [[self activeIndicatorsOfType:indicator.indicatorType] addObject:indicator];
+        [[self activeIndicatorsOfType:indicator.indicatorType] addSortableObject:indicator];
     }
 }
 
@@ -259,7 +260,7 @@ RegisterWithCallCenter
 
 #pragma mark - IndicatorDatasource methods
 
-- (NSMutableSet *)activeIndicatorsOfType:(IndicatorType)indicatorType {
+- (NSMutableArray *)activeIndicatorsOfType:(IndicatorType)indicatorType {
     switch (indicatorType) {
         case IndicatorTypePrimary:
             return self.primaryIndicators;
@@ -271,11 +272,11 @@ RegisterWithCallCenter
 }
 
 - (void)updateIndicator:(Indicator *)indicator isActive:(BOOL)isActive {
-    NSMutableSet *indicators = [self activeIndicatorsOfType:indicator.indicatorType];
+    NSMutableArray *indicators = [self activeIndicatorsOfType:indicator.indicatorType];
     if (isActive) {
-        [indicators addObject:indicator];
+        [indicators addSortableObject:indicator];
     } else {
-        [indicators removeObject:indicator];
+        [indicators removeSortableObject:indicator];
     }
     
     [self refresh];

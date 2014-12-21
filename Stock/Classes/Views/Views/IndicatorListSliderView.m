@@ -12,6 +12,7 @@
 #import "Indicator.h"
 #import "IndicatorList.h"
 #import "IndicatorListSliderTableViewCell.h"
+#import "NSArray+Sorted.h"
 
 static NSString *cellDequeueClassIdentifier = @"IndicatorListSliderTableViewCell";
 
@@ -84,7 +85,7 @@ static NSString *cellDequeueClassIdentifier = @"IndicatorListSliderTableViewCell
         
         if (indexPath.row < [indicators count]) {
             Indicator *indicator = [indicators objectAtIndex:indexPath.row];
-            BOOL isActive = [[self.datasource activeIndicatorsOfType:indicator.indicatorType] containsObject:indicator];
+            BOOL isActive = [[self.datasource activeIndicatorsOfType:indicator.indicatorType] containsSortableObject:indicator];
             
             customCell.owner = self;
             [customCell setupWithIndicator:indicator isActive:isActive];

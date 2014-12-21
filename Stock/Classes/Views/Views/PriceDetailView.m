@@ -58,8 +58,8 @@ static NSString *cellDequeueClassIdentifier = @"IndicatorDetailTableViewCell";
 #pragma mark - Refresh
 
 - (void)refresh {
-    self.primaryIndicators = [[self.datasource activeIndicatorsOfType:IndicatorTypePrimary] allObjects];
-    self.secondaryIndicators = [[self.datasource activeIndicatorsOfType:IndicatorTypeSecondary] allObjects];
+    self.primaryIndicators = [self.datasource activeIndicatorsOfType:IndicatorTypePrimary];
+    self.secondaryIndicators = [self.datasource activeIndicatorsOfType:IndicatorTypeSecondary];
     
     [self.detailsTable reloadData];
 }

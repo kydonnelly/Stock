@@ -16,6 +16,10 @@
     return price;
 }
 
+- (int)displayPriority {
+    return INT_MAX;
+}
+
 - (NSString *)displayName {
     return @"Price";
 }

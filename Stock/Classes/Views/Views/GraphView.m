@@ -224,7 +224,7 @@ typedef struct {
 #pragma mark - Price & Indicators
 
 - (void)drawPrimaryIndicators:(CGContextRef)context {
-    NSSet *primaryIndicators = [self.indicatorDatasource activeIndicatorsOfType:IndicatorTypePrimary];
+    NSArray *primaryIndicators = [self.indicatorDatasource activeIndicatorsOfType:IndicatorTypePrimary];
     
     for (Indicator *indicator in primaryIndicators) {
         CGContextSetStrokeColorWithColor(context, [indicator displayColor].CGColor);

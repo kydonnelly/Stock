@@ -27,6 +27,7 @@
 - (float)minPrice;
 - (float)maxPrice;
 
+- (int)displayPriority;
 - (NSString *)displayDetailsAtPriceIndex:(int)index;
 - (NSString *)displayName;
 - (UIColor *)displayColor;

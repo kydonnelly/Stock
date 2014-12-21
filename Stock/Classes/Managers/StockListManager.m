@@ -8,8 +8,9 @@
 
 #import "StockListManager.h"
 
-#import "ClassUtils.h"
 #import "AppData.h"
+#import "ClassUtils.h"
+#import "NSArray+Sorted.h"
 #import "Stock.h"
 
 static const int kRecentlyViewedQueueSize = 5;
@@ -121,34 +122,16 @@ MakeSingleton
     return newCategory;
 }
 
-- (NSUInteger)indexOfStockKey:(id)stockKey withCategory:(StockSelectionCategory)category searchOption:(NSBinarySearchingOptions)searchOption {
-    NSMutableArray *stockKeys = [self stocksForCategory:category];
-    NSRange searchRange = {0, [stockKeys count]};
-    
-    return [stockKeys indexOfObject:stockKey
-                      inSortedRange:searchRange
-                            options:searchOption
-                    usingComparator:^(id obj1, id obj2) {
-                        return [obj1 compare:obj2];
-                    }];
-}
-
 - (void)addStockId:(int)stockId toCategory:(StockSelectionCategory)category {
     id stockKey = [Stock keyForStockId:stockId];
     NSMutableArray *stockKeys = [self stocksForCategory:category];
-    
-    NSUInteger index = [self indexOfStockKey:stockKey withCategory:category searchOption:NSBinarySearchingInsertionIndex];
-    [stockKeys insertObject:stockKey atIndex:index];
+    [stockKeys addSortableObject:stockKey];
 }
 
 - (void)removeStockId:(int)stockId fromCategory:(StockSelectionCategory)category {
     id stockKey = [Stock keyForStockId:stockId];
-    NSUInteger index = [self indexOfStockKey:stockKey withCategory:category searchOption:NSBinarySearchingLastEqual];
-    
-    if (index != NSNotFound) {
-        NSMutableArray *stockKeys = [self stocksForCategory:category];
-        [stockKeys removeObjectAtIndex:index];
-    }
+    NSMutableArray *stockKeys = [self stocksForCategory:category];
+    [stockKeys removeSortableObject:stockKey];
 }
 
 - (void)addStockIdToRecentQueue:(int)stockId {

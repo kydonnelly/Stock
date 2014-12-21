@@ -10,6 +10,7 @@
 
 #import "ClassUtils.h"
 #import "Indicator.h"
+#import "NSArray+Sorted.h"
 
 @interface IndicatorList ()
 
@@ -40,7 +41,7 @@ MakeSingleton
 #pragma mark - Registration
 
 - (void)registerIndicator:(Indicator *)indicator {
-    [self.indicators addObject:indicator];
+    [self.indicators addSortableObject:indicator];
 }
 
 #pragma mark - Query

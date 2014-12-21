@@ -35,6 +35,7 @@
 		278047861A46773100676EB3 /* SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2780477B1A46773100676EB3 /* SliderView.m */; };
 		278047871A46773100676EB3 /* XibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2780477D1A46773100676EB3 /* XibView.m */; };
 		2780478A1A46780600676EB3 /* TriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 278047891A46780600676EB3 /* TriangleView.m */; };
+		278047961A46B61600676EB3 /* NSArray+Sorted.m in Sources */ = {isa = PBXBuildFile; fileRef = 278047951A46B61600676EB3 /* NSArray+Sorted.m */; };
 		2781F8AB1A3E9BAB00011A14 /* IndicatorListSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2781F8AA1A3E9BAB00011A14 /* IndicatorListSliderTableViewCell.xib */; };
 		27A7FF501A2B23FF00BF2DDA /* favorite_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 27A7FF4E1A2B23FF00BF2DDA /* favorite_on.png */; };
 		27A7FF511A2B23FF00BF2DDA /* favorite_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 27A7FF4F1A2B23FF00BF2DDA /* favorite_off.png */; };
@@ -116,6 +117,8 @@
 		2780477D1A46773100676EB3 /* XibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XibView.m; sourceTree = "<group>"; };
 		278047881A46780600676EB3 /* TriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleView.h; sourceTree = "<group>"; };
 		278047891A46780600676EB3 /* TriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleView.m; sourceTree = "<group>"; };
+		278047941A46B61600676EB3 /* NSArray+Sorted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Sorted.h"; sourceTree = "<group>"; };
+		278047951A46B61600676EB3 /* NSArray+Sorted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Sorted.m"; sourceTree = "<group>"; };
 		2781F8AA1A3E9BAB00011A14 /* IndicatorListSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndicatorListSliderTableViewCell.xib; sourceTree = "<group>"; };
 		27A7FF4E1A2B23FF00BF2DDA /* favorite_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite_on.png; sourceTree = "<group>"; };
 		27A7FF4F1A2B23FF00BF2DDA /* favorite_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite_off.png; sourceTree = "<group>"; };
@@ -361,6 +364,8 @@
 				27E4C4971A3E96540079B803 /* IndicatorList.m */,
 				27B9591C1A2ADEB600AA08BA /* LocalizationHelper.h */,
 				27B9591D1A2ADEB600AA08BA /* LocalizationHelper.m */,
+				278047941A46B61600676EB3 /* NSArray+Sorted.h */,
+				278047951A46B61600676EB3 /* NSArray+Sorted.m */,
 				27B9591F1A2ADED200AA08BA /* Singleton+Protocol.h */,
 			);
 			path = Utilities;
@@ -535,6 +540,7 @@
 				27BC33561A3D917C003A085F /* Indicator.m in Sources */,
 				276B1D911A2A6A4300B7EF9F /* AppDelegate.m in Sources */,
 				27B959221A2AE9F900AA08BA /* AppData.m in Sources */,
+				278047961A46B61600676EB3 /* NSArray+Sorted.m in Sources */,
 				27B958FD1A2AA39400AA08BA /* MasterViewController.m in Sources */,
 				278047871A46773100676EB3 /* XibView.m in Sources */,
 				278047821A46773100676EB3 /* StockSelectionTableViewCell.m in Sources */,

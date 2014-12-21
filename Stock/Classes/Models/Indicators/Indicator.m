@@ -85,6 +85,25 @@
     return 0.f;
 }
 
+#pragma mark - Display Sorting
+
+- (int)displayPriority {
+    return 0;
+}
+
+- (NSComparisonResult)compare:(Indicator *)otherIndicator {
+    int priority1 = [self displayPriority];
+    int priority2 = [otherIndicator displayPriority];
+    
+    if (priority1 > priority2) {
+        return NSOrderedAscending;
+    } else if (priority1 < priority2) {
+        return NSOrderedDescending;
+    } else {
+        return [[self displayName] compare:[otherIndicator displayName]];
+    }
+}
+
 @end
 
 @implementation SecondaryIndicator

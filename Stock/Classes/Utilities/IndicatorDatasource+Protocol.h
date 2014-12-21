@@ -14,7 +14,7 @@
 
 @protocol IndicatorDatasource
 
-- (NSSet *)activeIndicatorsOfType:(IndicatorType)indicatorType;
+- (NSArray *)activeIndicatorsOfType:(IndicatorType)indicatorType;
 - (void)updateIndicator:(Indicator *)indicator isActive:(BOOL)isActive;
 
 @end

@@ -8,8 +8,8 @@
 
 #import "Stock.h"
 
-#import "ClassUtils.h"
 #import "AppData.h"
+#import "ClassUtils.h"
 
 @implementation Stock
 

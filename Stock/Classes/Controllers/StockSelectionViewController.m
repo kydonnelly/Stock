@@ -8,9 +8,9 @@
 
 #import "StockSelectionViewController.h"
 
+#import "AppData.h"
 #import "CallCenter.h"
 #import "ClassUtils.h"
-#import "AppData.h"
 #import "LocalizationHelper.h"
 #import "MasterViewController.h"
 #import "PriceGraphViewController.h"

@@ -286,6 +286,7 @@
 		278047731A46773100676EB3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2780477C1A46773100676EB3 /* XibView.h */,
 				278047741A46773100676EB3 /* GraphView.h */,
 				278047751A46773100676EB3 /* GraphView.m */,
 				278047761A46773100676EB3 /* IndicatorListSliderView.h */,
@@ -296,7 +297,6 @@
 				2780477B1A46773100676EB3 /* SliderView.m */,
 				278047881A46780600676EB3 /* TriangleView.h */,
 				278047891A46780600676EB3 /* TriangleView.m */,
-				2780477C1A46773100676EB3 /* XibView.h */,
 				2780477D1A46773100676EB3 /* XibView.m */,
 			);
 			path = Views;

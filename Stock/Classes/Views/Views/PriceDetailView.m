@@ -16,6 +16,7 @@ static NSString *cellDequeueClassIdentifier = @"IndicatorDetailTableViewCell";
 
 @interface PriceDetailView () <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, retain) IBOutlet UIView *mobileView;
 @property (nonatomic, retain) IBOutlet UIView *detailView;
 @property (nonatomic, retain) IBOutlet TriangleView *anchorView;
 @property (nonatomic, retain) IBOutlet UILabel *dateLabel;
@@ -34,6 +35,7 @@ static NSString *cellDequeueClassIdentifier = @"IndicatorDetailTableViewCell";
 #pragma mark - Lifecycle
 
 - (void)dealloc {
+    [_mobileView release], _mobileView = nil;
     [_detailView release], _detailView = nil;
     [_anchorView release], _anchorView = nil;
     [_dateLabel release], _dateLabel = nil;
@@ -65,6 +67,10 @@ static NSString *cellDequeueClassIdentifier = @"IndicatorDetailTableViewCell";
 - (void)setPosition:(CGPoint)position inBounds:(CGRect)bounds {
     self.percentAcrossScreen = position.x / bounds.size.width;
     self.anchorView.triangleType = TriangleTypeDown;
+    self.mobileView.frame = CGRectMake(position.x - self.mobileView.frame.size.width / 2.f,
+                                       position.y - self.mobileView.frame.size.height,
+                                       self.mobileView.frame.size.width,
+                                       self.mobileView.frame.size.height);
     
     [self refresh];
 }

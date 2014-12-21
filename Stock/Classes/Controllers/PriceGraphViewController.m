@@ -33,12 +33,11 @@ static const float kPanDampeningFactor = 0.01f;
 
 @interface PriceGraphViewController () <IndicatorDatasource, UIGestureRecognizerDelegate>
 
-@property (nonatomic, retain) IBOutlet GraphView *graphView;
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic, retain) IBOutlet ExtendedStateButton *favoriteButton;
+@property (nonatomic, retain) IBOutlet GraphView *graphView;
+@property (nonatomic, retain) IBOutlet PriceDetailView *priceDetailView;
 @property (nonatomic, retain) IBOutlet IndicatorListSliderView *optionsSliderView;
-
-@property (nonatomic, retain) PriceDetailView *priceDetailView;
 
 @property (nonatomic, retain) Stock *stock;
 @property (nonatomic) StockSelectionCategory stockCategory;
@@ -132,6 +131,11 @@ RegisterWithCallCenter
     [self addGestureRecognizer:hold];
     
     [self.graphView setIndicatorDatasource:self];
+    
+    self.priceDetailView = [[[PriceDetailView alloc] init] autorelease];
+    [self.priceDetailView setupWithDatasource:self];
+    self.priceDetailView.hidden = YES;
+    [self.view addSubview:self.priceDetailView];
     
     [self.optionsSliderView setupWithDatasource:self];
 }
@@ -321,21 +325,15 @@ RegisterWithCallCenter
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateFailed:
-            [self.priceDetailView removeFromSuperview];
-            self.priceDetailView = nil;
+            self.priceDetailView.hidden = YES;
             return;
         default:
             break;
     }
     
-    if (!self.priceDetailView) {
-        self.priceDetailView = [[[PriceDetailView alloc] init] autorelease];
-        [self.priceDetailView setupWithDatasource:self];
-        [self.view addSubview:self.priceDetailView];
-    }
-    
-    CGPoint holdPoint = [gestureRecognizer locationInView:self.graphView];
-    [self.priceDetailView setPosition:holdPoint inBounds:self.graphView.frame];
+    self.priceDetailView.hidden = NO;
+    CGPoint holdPoint = [gestureRecognizer locationInView:self.view];
+    [self.priceDetailView setPosition:holdPoint inBounds:self.view.frame];
 }
 
 @end

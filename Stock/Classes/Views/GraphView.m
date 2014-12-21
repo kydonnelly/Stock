@@ -170,7 +170,7 @@ typedef struct {
     
     CGFloat yPos = self.frame.size.height - self.yStepInfo.drawingStepInfo.stepStart;
     CGFloat width = self.frame.size.width;
-    for (int i = 0; i < VERTICAL_SECTIONS; i++) {
+    for (int i = 0; i < kVerticalSections; i++) {
         CGContextMoveToPoint(context, 0, yPos);
         CGContextAddLineToPoint(context, width, yPos);
         

@@ -9,34 +9,16 @@
 #import "GraphView.h"
 
 #import "ClassUtils.h"
-#import "Indicator.h"
 
-static const int kVerticalSections = 5;
-static const int kHorizontalSections = 4;
-static const CGFloat kVerticalBuffer = .05f;
 static const int kLabelTextSize = 12;
-
-typedef struct {
-    CGFloat step;
-    CGFloat stepStart;
-} stepInfo;
-
-typedef struct {
-    int displayPrecision;
-    stepInfo displayStepInfo;
-    stepInfo drawingStepInfo;
-} axisInfo;
 
 @interface GraphView ()
 
 @property (nonatomic) CGFloat axisValue;
-@property (nonatomic) axisInfo xStepInfo;
-@property (nonatomic) axisInfo yStepInfo;
+@property (nonatomic) stepInfo xDrawingInfo;
+@property (nonatomic) stepInfo yDrawingInfo;
 
-@property (nonatomic) CGFloat minY;
-@property (nonatomic) CGFloat maxY;
-
-@property (nonatomic, assign) id<IndicatorDatasource> indicatorDatasource;
+@property (nonatomic, assign) id<GraphDatasource> datasource;
 
 @end
 
@@ -45,74 +27,45 @@ typedef struct {
 #pragma mark - Lifecycle
 
 - (void)dealloc {
-    _indicatorDatasource = nil;
+    _datasource = nil;
     
     [super dealloc];
 }
 
 #pragma mark - Setup
 
-- (axisInfo)stepForValuesFrom:(CGFloat)start
-                           to:(CGFloat)end
-                     numSteps:(int)steps
-                 contextScale:(CGFloat)contextScale {
-    axisInfo axisInfo;
-    stepInfo displayInfo;
+- (stepInfo)drawingInfoForStepInfo:(stepInfo)displayInfo
+                     originalStart:(float)start
+                      contextScale:(CGFloat)contextScale {
     stepInfo drawingInfo;
-    
-    CGFloat range = end - start;
-    CGFloat rawStep = range / steps;
-    
-    float scale = 1;
-    int displayPrecision = 0;
-    while (rawStep * scale < 1.f) {
-        scale *= 10;
-        displayPrecision++;
-    }
-    while (rawStep * scale > 10.f) {
-        scale /= 10;
-    }
-    
-    int scaledStep = rawStep * scale;
-    int remainder = range * scale - (scaledStep * (steps - 1));
-    
-    displayInfo.step = scaledStep / scale;
-    displayInfo.stepStart = start + (remainder / 2.f) / scale;
-    if (remainder % 2) {
-        displayPrecision++;
-    }
-    
     drawingInfo.step = displayInfo.step * contextScale;
     drawingInfo.stepStart = (displayInfo.stepStart - start) * contextScale;
+    drawingInfo.numSteps = displayInfo.numSteps;
     
-    axisInfo.displayPrecision = displayPrecision;
-    axisInfo.displayStepInfo = displayInfo;
-    axisInfo.drawingStepInfo = drawingInfo;
-    
-    return axisInfo;
+    return drawingInfo;
 }
 
-- (void)setMinX:(float)minX maxX:(float)maxX minY:(float)minY maxY:(float)maxY axisY:(float)axisY {
-    CGFloat yBuffer = (maxY - minY) * kVerticalBuffer;
-    maxY += yBuffer;
-    minY -= yBuffer;
+- (void)refresh {
+    CGSize size = self.frame.size;
+    CGFloat xScale = size.width / (self.datasource.maxX - self.datasource.minX);
+    CGFloat yScale = size.height / (self.datasource.maxY - self.datasource.minY);
     
-    CGFloat xScale = self.frame.size.width / (maxX - minX);
-    CGFloat yScale = self.frame.size.height / (maxY - minY);
+    self.xDrawingInfo = [self drawingInfoForStepInfo:self.datasource.domainInfo
+                                       originalStart:self.datasource.minX
+                                        contextScale:xScale];
     
-    self.xStepInfo = [self stepForValuesFrom:minX
-                                          to:maxX
-                                    numSteps:kHorizontalSections
-                                contextScale:xScale];
-    self.yStepInfo = [self stepForValuesFrom:minY
-                                          to:maxY
-                                    numSteps:kVerticalSections
-                                contextScale:yScale];
+    self.yDrawingInfo = [self drawingInfoForStepInfo:self.datasource.rangeInfo
+                                       originalStart:self.datasource.minY
+                                        contextScale:yScale];
     
-    self.minY = minY;
-    self.maxY = maxY;
+    [self setNeedsDisplay];
+}
+
+- (void)addAxisAtY:(float)axisY {
+    float minY = self.datasource.minY;
+    float maxY = self.datasource.maxY;
+    
     self.axisValue = (maxY - axisY) / (maxY - minY) * self.frame.size.height;
-    
     [self setNeedsDisplay];
 }
 
@@ -134,7 +87,7 @@ typedef struct {
     [self addVerticalLabels:context];
     [self addHorizontalLabels:context];
     
-    [self drawPrimaryIndicators:context];
+    [self drawFunctions:context];
     
 	UIGraphicsPopContext();
 }
@@ -153,13 +106,13 @@ typedef struct {
 - (void)drawVerticalLines:(CGContextRef)context {
     CGContextBeginPath(context);
     
-    CGFloat xPos = self.xStepInfo.drawingStepInfo.stepStart;
+    CGFloat xPos = self.xDrawingInfo.stepStart;
     CGFloat height = self.frame.size.height;
-    for (int i = 0; i < kHorizontalSections; i++) {
+    for (int i = 0; i < self.xDrawingInfo.numSteps; i++) {
         CGContextMoveToPoint(context, xPos, 0);
         CGContextAddLineToPoint(context, xPos, height);
         
-        xPos += self.xStepInfo.drawingStepInfo.step;
+        xPos += self.xDrawingInfo.step;
     }
     
     CGContextStrokePath(context);
@@ -168,13 +121,13 @@ typedef struct {
 - (void)drawHorizontalLines:(CGContextRef)context {
     CGContextBeginPath(context);
     
-    CGFloat yPos = self.frame.size.height - self.yStepInfo.drawingStepInfo.stepStart;
+    CGFloat yPos = self.frame.size.height - self.yDrawingInfo.stepStart;
     CGFloat width = self.frame.size.width;
-    for (int i = 0; i < kVerticalSections; i++) {
+    for (int i = 0; i < self.yDrawingInfo.numSteps; i++) {
         CGContextMoveToPoint(context, 0, yPos);
         CGContextAddLineToPoint(context, width, yPos);
         
-        yPos -= self.yStepInfo.drawingStepInfo.step;
+        yPos -= self.yDrawingInfo.step;
     }
     
     CGContextStrokePath(context);
@@ -182,10 +135,7 @@ typedef struct {
 
 #pragma mark - Grid Labels
 
-- (void)drawNumberText:(float)value decimalPrecision:(int)precision x:(CGFloat)x y:(CGFloat)y {
-    NSString *format = [@"%" stringByAppendingString:[NSString stringWithFormat:@".%df", precision]];
-    NSString *text = [NSString stringWithFormat:format, value];
-    
+- (void)drawText:(NSString *)text x:(CGFloat)x y:(CGFloat)y {
     CGRect textRect;
     NSDictionary *fontAttributes = [NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:kLabelTextSize] forKey:NSFontAttributeName];
     
@@ -197,53 +147,53 @@ typedef struct {
 }
 
 - (void)addVerticalLabels:(CGContextRef)context {
-    CGFloat xPos = self.xStepInfo.drawingStepInfo.stepStart;
-    float xValue = self.xStepInfo.displayStepInfo.stepStart;
+    CGFloat xPosition = self.xDrawingInfo.stepStart;
     CGFloat height = self.frame.size.height;
     
-    for (int i = 0; i < kHorizontalSections; i++) {
-        [self drawNumberText:xValue decimalPrecision:self.xStepInfo.displayPrecision x:xPos y:height];
+    for (int i = 0; i < self.xDrawingInfo.numSteps; i++) {
+        NSString *text = [self.datasource labelForX:xPosition];
+        [self drawText:text x:xPosition y:height];
         
-        xPos += self.xStepInfo.drawingStepInfo.step;
-        xValue += self.xStepInfo.displayStepInfo.step;
+        xPosition += self.xDrawingInfo.step;
     }
 }
 
 - (void)addHorizontalLabels:(CGContextRef)context {
-    CGFloat yPosition = self.frame.size.height - self.yStepInfo.drawingStepInfo.stepStart;
-    float yValue = self.yStepInfo.displayStepInfo.stepStart;
+    CGFloat yPosition = self.frame.size.height - self.yDrawingInfo.stepStart;
     
-    for (int i = 0; i < kVerticalSections; i++) {
-        [self drawNumberText:yValue decimalPrecision:self.yStepInfo.displayPrecision x:0 y:yPosition];
+    for (int i = 0; i < self.yDrawingInfo.numSteps; i++) {
+        NSString *text = [self.datasource labelForY:yPosition];
+        [self drawText:text x:0 y:yPosition];
         
-        yPosition -= self.yStepInfo.drawingStepInfo.step;
-        yValue += self.yStepInfo.displayStepInfo.step;
+        yPosition -= self.yDrawingInfo.step;
     }
 }
 
-#pragma mark - Price & Indicators
+#pragma mark - Graphing Functions
 
-- (void)drawPrimaryIndicators:(CGContextRef)context {
-    NSArray *primaryIndicators = [self.indicatorDatasource activeIndicatorsOfType:IndicatorTypePrimary];
+- (void)drawFunctions:(CGContextRef)context {
+    NSArray *graphObjects = [self.datasource graphObjects];
+    float minY = self.datasource.minY;
+    float maxY = self.datasource.maxY;
     
-    for (Indicator *indicator in primaryIndicators) {
-        CGContextSetStrokeColorWithColor(context, [indicator displayColor].CGColor);
-        CGContextSetLineWidth(context, [indicator lineWidth]);
+    for (id<GraphObject> model in graphObjects) {
+        CGContextSetStrokeColorWithColor(context, [model displayColor].CGColor);
+        CGContextSetLineWidth(context, [model lineWidth]);
         
-        NSArray *prices = [indicator allPrices];
+        NSArray *yValues = [model yValues];
         
-        CGFloat xStep = self.frame.size.width / [prices count];
+        CGFloat xStep = self.frame.size.width / [yValues count];
         CGFloat frameHeight = self.frame.size.height;
-        CGFloat yScale = frameHeight / (self.maxY - self.minY);
+        CGFloat yScale = frameHeight / (maxY - minY);
         
         CGFloat x = 0;
-        CGFloat y = frameHeight - ([[prices firstObject] floatValue] - self.minY) * yScale;
+        CGFloat y = frameHeight - ([[yValues firstObject] floatValue] - minY) * yScale;
         
         CGContextBeginPath(context);
         CGContextMoveToPoint(context, x, y);
         
-        for (NSNumber *yNumber in prices) {
-            y = frameHeight - ([yNumber floatValue] - self.minY) * yScale;
+        for (NSNumber *yNumber in yValues) {
+            y = frameHeight - ([yNumber floatValue] - minY) * yScale;
             
             CGContextAddLineToPoint(context, x, y);
             CGContextMoveToPoint(context, x, y);

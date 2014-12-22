@@ -8,6 +8,7 @@
 
 #import "PriceDetailView.h"
 
+#import "ClassUtils.h"
 #import "Indicator.h"
 #import "IndicatorDetailTableViewCell.h"
 #import "TriangleView.h"
@@ -35,16 +36,16 @@ static NSString *cellDequeueClassIdentifier = @"IndicatorDetailTableViewCell";
 #pragma mark - Lifecycle
 
 - (void)dealloc {
-    [_mobileView release], _mobileView = nil;
-    [_detailView release], _detailView = nil;
-    [_anchorView release], _anchorView = nil;
-    [_dateLabel release], _dateLabel = nil;
-    [_detailsTable release], _detailsTable = nil;
+    ReleaseIvar(_mobileView);
+    ReleaseIvar(_detailView);
+    ReleaseIvar(_anchorView);
+    ReleaseIvar(_dateLabel);
+    ReleaseIvar(_detailsTable);
     
     _datasource = nil;
     
-    [_primaryIndicators release], _primaryIndicators = nil;
-    [_secondaryIndicators release], _secondaryIndicators = nil;
+    ReleaseIvar(_primaryIndicators);
+    ReleaseIvar(_secondaryIndicators);
     
     [super dealloc];
 }
@@ -117,7 +118,7 @@ static NSString *cellDequeueClassIdentifier = @"IndicatorDetailTableViewCell";
             indicator = [self.secondaryIndicators objectAtIndex:(indexPath.row - numPrimaryIndicators)];
         }
         
-        int index = [[indicator allPrices] count] * self.percentAcrossScreen;
+        int index = [[indicator yValues] count] * self.percentAcrossScreen;
         [customCell setupWithIndicator:indicator forPriceIndex:index];
     }
 }

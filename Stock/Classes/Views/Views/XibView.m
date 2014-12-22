@@ -10,18 +10,10 @@
 
 @implementation XibView
 
-- (id)init {
+- (id)initWithOwner:(id)owner {
     [self autorelease];
-    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:owner options:nil];
     return [[subviewArray lastObject] retain];
-}
-
-- (id)initWithFrame:(CGRect)frame {
-    if (self = [self init]) {
-        self.frame = frame;
-    }
-    
-    return self;
 }
 
 @end

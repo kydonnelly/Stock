@@ -52,13 +52,13 @@ static const int kDefaultPeriod = 20;
 
 #pragma mark - Setup
 
-- (void)setupWithPrices:(NSArray *)prices {
+- (void)initializeFromValues:(NSArray *)yValues {
     self.priceQueue = [NSMutableArray array];
     self.isPriceQueueFull = NO;
     self.cachedMovingAverage = 0;
     
     // todo: need to load older prices if possible
-    [super setupWithPrices:prices];
+    [super initializeFromValues:yValues];
 }
 
 #pragma mark - Indicator logic

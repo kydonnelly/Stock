@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 kyle. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "GraphViewController.h"
 
 @class Stock;
 
-@interface PriceGraphViewController : UIViewController
+@interface PriceGraphViewController : GraphViewController
 
 - (void)setupWithStock:(Stock *)stock;
 

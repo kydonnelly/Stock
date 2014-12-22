@@ -15,23 +15,19 @@
 
 #import <Foundation/Foundation.h>
 
+#import "GraphData+Protocols.h"
 #import "Indicator+Types.h"
 
-@interface Indicator : NSObject
-
-- (void)setupWithPrices:(NSArray *)prices;
+@interface Indicator : NSObject <GraphObject>
 
 - (IndicatorType)indicatorType;
 
-- (NSArray *)allPrices;
 - (float)minPrice;
 - (float)maxPrice;
 
-- (int)displayPriority;
 - (NSString *)displayDetailsAtPriceIndex:(int)index;
 - (NSString *)displayName;
-- (UIColor *)displayColor;
-- (float)lineWidth;
+- (int)displayPriority;
 
 @end
 

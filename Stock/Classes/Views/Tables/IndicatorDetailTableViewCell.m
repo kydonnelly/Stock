@@ -8,6 +8,7 @@
 
 #import "IndicatorDetailTableViewCell.h"
 
+#import "ClassUtils.h"
 #import "Indicator.h"
 
 @interface IndicatorDetailTableViewCell ()
@@ -21,10 +22,10 @@
 @implementation IndicatorDetailTableViewCell
 
 - (void)dealloc {
-    [_colorView release], _colorView = nil;
-    [_nameLabel release], _nameLabel = nil;
-    [_detailLabel release], _detailLabel = nil;
-    
+    ReleaseIvar(_colorView);
+    ReleaseIvar(_nameLabel);
+    ReleaseIvar(_detailLabel);
+
     [super dealloc];
 }
 

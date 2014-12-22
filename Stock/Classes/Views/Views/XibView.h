@@ -12,4 +12,6 @@
 
 @interface XibView : UIView
 
+- (id)initWithOwner:(id)owner;
+
 @end

@@ -33,15 +33,15 @@
     [super dealloc];
 }
 
-#pragma mark - setup
+#pragma mark - GraphObject
 
-- (void)setupWithPrices:(NSArray *)prices {
-    self.prices = [NSMutableArray arrayWithCapacity:[prices count]];
+- (void)initializeFromValues:(NSArray *)yValues {
+    self.prices = [NSMutableArray arrayWithCapacity:[yValues count]];
     
     self.minPrice = FLT_MAX;
     self.maxPrice = 0.f;
     
-    for (NSNumber *priceNumber in prices) {
+    for (NSNumber *priceNumber in yValues) {
         float price = [self indicatorPriceForRawPrice:[priceNumber floatValue]];
         [self.prices addObject:@(price)];
         
@@ -59,11 +59,11 @@
     return 0;
 }
 
-#pragma mark - Display Queries
-
-- (NSArray *)allPrices {
+- (NSArray *)yValues {
     return self.prices;
 }
+
+#pragma mark - Display Queries
 
 - (NSString *)displayDetailsAtPriceIndex:(int)index {
     // todo: variable display precision as in graph view

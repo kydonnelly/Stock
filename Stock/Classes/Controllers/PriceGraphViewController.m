@@ -206,6 +206,25 @@ RegisterWithCallCenter
 
 #pragma mark - Graphing Overrides
 
+- (NSString *)labelForX:(CGFloat)x {
+    int days = self.displayedEndTime - self.displayedStartTime;
+    
+    NSString *format = nil;
+    if (days <= 1) {
+        format = @"HH:mm";
+    } else if (days <= 3) {
+        format = @"dd-HH";
+    } else if (days <= 60) {
+        format = @"MM/dd";
+    } else if (days <= 300) {
+        format = @"MM";
+    } else {
+        format = @"MM/YY";
+    }
+    
+    return [self labelForX:x format:format];
+}
+
 - (float)maxDomain {
     return [GET(StockPriceManager) daysAvailableForStockId:self.stock.stockId];
 }

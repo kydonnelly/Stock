@@ -18,8 +18,9 @@ typedef struct {
 
 - (NSArray *)graphObjects;
 
-- (NSString *)labelForX:(CGFloat)x;
 - (NSString *)labelForY:(CGFloat)y;
+- (NSString *)labelForX:(CGFloat)x;
+- (NSString *)labelForX:(CGFloat)x format:(NSString *)format;
 
 - (float)minX;
 - (float)maxX;

@@ -94,7 +94,7 @@ static const CGFloat kGraphLineBuffer = 15;
     
     [self moveToX:x y:y maxX:maxX];
     
-    [self.dateLabel setText:[self.datasource labelForX:position.x]];
+    [self.dateLabel setText:[self.datasource labelForX:position.x format:@"MM-dd-YY HH:mm"]];
     [self refresh];
 }
 

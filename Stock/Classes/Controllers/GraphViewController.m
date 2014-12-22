@@ -116,13 +116,17 @@ static const float kPanDampeningFactor = 0.01f;
 }
 
 - (NSString *)labelForX:(CGFloat)x {
+    return [self labelForX:x format:@"MM/dd/YY HH:mm:ss"];
+}
+
+- (NSString *)labelForX:(CGFloat)x format:(NSString *)format {
     CGFloat percentAlongAxis = x / self.graphView.frame.size.width;
     CGFloat distanceFromStart = (self.displayedEndTime - self.displayedStartTime) * percentAlongAxis;
     float daysAgo = self.displayedStartTime + distanceFromStart;
     
     // todo: accurate times
     NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-    [formatter setDateFormat:@"dd-HH:mm"];
+    [formatter setDateFormat:format];
     
     NSDate *now = [[[NSDate alloc] init] autorelease];
     

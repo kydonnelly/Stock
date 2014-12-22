@@ -11,8 +11,10 @@
 @implementation TriangleView
 
 - (void)setTriangleType:(TriangleType)triangleType {
-    _triangleType = triangleType;
-    [self setNeedsDisplay];
+    if (_triangleType != triangleType) {
+        _triangleType = triangleType;
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)drawRect:(CGRect)rect

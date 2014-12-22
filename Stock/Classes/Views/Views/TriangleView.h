@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-    TriangleTypeDown = 0,
+    TriangleTypeDown = 1,
     TriangleTypeUp,
 } TriangleType;
 

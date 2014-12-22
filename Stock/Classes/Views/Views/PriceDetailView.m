@@ -72,14 +72,13 @@ static const CGFloat kGraphLineBuffer = 15;
 }
 
 - (void)setPosition:(CGPoint)position inBounds:(CGRect)bounds {
-    [self.dateLabel setText:[self.datasource labelForX:position.x]];
-    self.percentAcrossScreen = position.x / bounds.size.width;
-    
     NSArray *indicators = [self.datasource graphObjects];
     int highestPriority = 0;
     float price = 0.f;
     
     Assert([indicators count], @"No indicator for detail box position.");
+    self.percentAcrossScreen = position.x / bounds.size.width;
+    
     for (Indicator *indicator in indicators) {
         if ([indicator displayPriority] > highestPriority) {
             highestPriority = [indicator displayPriority];
@@ -88,23 +87,14 @@ static const CGFloat kGraphLineBuffer = 15;
         }
     }
     
-    float yPercent = (self.datasource.maxY - price) / (self.datasource.maxY - self.datasource.minY);
+    CGFloat maxX = bounds.size.width - self.mobileView.frame.size.width;
     CGFloat x = position.x - self.mobileView.frame.size.width / 2.f;
+    float yPercent = (self.datasource.maxY - price) / (self.datasource.maxY - self.datasource.minY);
     CGFloat y = yPercent * bounds.size.height;
     
-    if (y - self.mobileView.frame.size.height - kGraphLineBuffer < 0) {
-        [self setupLayoutBelow];
-        y += kGraphLineBuffer;
-    } else {
-        [self setupLayoutAbove];
-        y -= self.mobileView.frame.size.height + kGraphLineBuffer;
-    }
+    [self moveToX:x y:y maxX:maxX];
     
-    self.mobileView.frame = CGRectMake(x,
-                                       y,
-                                       self.mobileView.frame.size.width,
-                                       self.mobileView.frame.size.height);
-    
+    [self.dateLabel setText:[self.datasource labelForX:position.x]];
     [self refresh];
 }
 
@@ -112,7 +102,7 @@ static const CGFloat kGraphLineBuffer = 15;
     return [[model yValues] count] * self.percentAcrossScreen;
 }
 
-#pragma mark - Flipping
+#pragma mark - Positioning
 
 - (void)stackViews:(NSArray *)views {
     CGFloat ySum = 0;
@@ -133,6 +123,38 @@ static const CGFloat kGraphLineBuffer = 15;
 - (void)setupLayoutBelow {
     self.anchorView.triangleType = TriangleTypeUp;
     [self stackViews:[NSArray arrayWithObjects:self.anchorView, self.detailView, nil]];
+}
+
+- (void)moveToX:(CGFloat)x y:(CGFloat)y maxX:(CGFloat)maxX {
+    if (y - self.mobileView.frame.size.height - kGraphLineBuffer < 0) {
+        [self setupLayoutBelow];
+        y += kGraphLineBuffer;
+    } else {
+        [self setupLayoutAbove];
+        y -= self.mobileView.frame.size.height + kGraphLineBuffer;
+    }
+    
+    CGFloat anchorWidth = self.anchorView.frame.size.width;
+    CGFloat mobileWidth = self.mobileView.frame.size.width;
+    CGFloat referenceX = mobileWidth / 2.f - anchorWidth / 2.f;
+    CGFloat dx = 0;
+    
+    if (x < 0) {
+        dx = x;
+        x = 0;
+    } else if (x > maxX) {
+        dx = x - maxX;
+        x = maxX;
+    }
+    
+    self.anchorView.frame = CGRectMake(referenceX + dx,
+                                       self.anchorView.frame.origin.y,
+                                       anchorWidth,
+                                       self.anchorView.frame.size.height);
+    self.mobileView.frame = CGRectMake(x,
+                                       y,
+                                       mobileWidth,
+                                       self.mobileView.frame.size.height);
 }
 
 #pragma mark - UITableViewDataSource delegate methods

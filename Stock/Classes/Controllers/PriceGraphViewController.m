@@ -260,6 +260,7 @@ RegisterWithCallCenter
 
 - (IBAction)hideDetailView {
     self.priceDetailView.hidden = YES;
+    [self.priceDetailView reset];
 }
 
 @end

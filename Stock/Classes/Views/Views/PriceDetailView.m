@@ -15,6 +15,8 @@
 
 static NSString *cellDequeueClassIdentifier = @"IndicatorDetailTableViewCell";
 
+static const CGFloat kGraphLineBuffer = 15;
+
 @interface PriceDetailView () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UIView *mobileView;
@@ -23,8 +25,8 @@ static NSString *cellDequeueClassIdentifier = @"IndicatorDetailTableViewCell";
 @property (nonatomic, retain) IBOutlet UILabel *dateLabel;
 @property (nonatomic, retain) IBOutlet UITableView *detailsTable;
 
-@property (nonatomic, assign) id<IndicatorDatasource> datasource;
-@property (nonatomic) float percentAcrossScreen;
+@property (nonatomic, assign) id<IndicatorDatasource, GraphDatasource> datasource;
+@property (nonatomic) CGFloat percentAcrossScreen;
 
 @property (nonatomic, retain) NSArray *primaryIndicators;
 @property (nonatomic, retain) NSArray *secondaryIndicators;
@@ -52,7 +54,7 @@ static NSString *cellDequeueClassIdentifier = @"IndicatorDetailTableViewCell";
 
 #pragma mark - Setup
 
-- (void)setupWithDatasource:(id<IndicatorDatasource>)datasource {
+- (void)setupWithDatasource:(id<IndicatorDatasource, GraphDatasource>)datasource {
     self.datasource = datasource;
 }
 
@@ -65,15 +67,72 @@ static NSString *cellDequeueClassIdentifier = @"IndicatorDetailTableViewCell";
     [self.detailsTable reloadData];
 }
 
+- (void)reset {
+    [self.detailsTable setContentOffset:CGPointZero animated:NO];
+}
+
 - (void)setPosition:(CGPoint)position inBounds:(CGRect)bounds {
+    [self.dateLabel setText:[self.datasource labelForX:position.x]];
     self.percentAcrossScreen = position.x / bounds.size.width;
-    self.anchorView.triangleType = TriangleTypeDown;
-    self.mobileView.frame = CGRectMake(position.x - self.mobileView.frame.size.width / 2.f,
-                                       position.y - self.mobileView.frame.size.height,
+    
+    NSArray *indicators = [self.datasource graphObjects];
+    int highestPriority = 0;
+    float price = 0.f;
+    
+    Assert([indicators count], @"No indicator for detail box position.");
+    for (Indicator *indicator in indicators) {
+        if ([indicator displayPriority] > highestPriority) {
+            highestPriority = [indicator displayPriority];
+            int priceIndex = [self currentPriceIndexForGraphObject:indicator];
+            price = [[[indicator yValues] objectAtIndex:priceIndex] floatValue];
+        }
+    }
+    
+    float yPercent = (self.datasource.maxY - price) / (self.datasource.maxY - self.datasource.minY);
+    CGFloat x = position.x - self.mobileView.frame.size.width / 2.f;
+    CGFloat y = yPercent * bounds.size.height;
+    
+    if (y - self.mobileView.frame.size.height - kGraphLineBuffer < 0) {
+        [self setupLayoutBelow];
+        y += kGraphLineBuffer;
+    } else {
+        [self setupLayoutAbove];
+        y -= self.mobileView.frame.size.height + kGraphLineBuffer;
+    }
+    
+    self.mobileView.frame = CGRectMake(x,
+                                       y,
                                        self.mobileView.frame.size.width,
                                        self.mobileView.frame.size.height);
     
     [self refresh];
+}
+
+- (int)currentPriceIndexForGraphObject:(id<GraphObject>)model {
+    return [[model yValues] count] * self.percentAcrossScreen;
+}
+
+#pragma mark - Flipping
+
+- (void)stackViews:(NSArray *)views {
+    CGFloat ySum = 0;
+    for (UIView *view in views) {
+        view.frame = CGRectMake(view.frame.origin.x,
+                                ySum,
+                                view.frame.size.width,
+                                view.frame.size.height);
+        ySum += view.frame.size.height;
+    }
+}
+
+- (void)setupLayoutAbove {
+    self.anchorView.triangleType = TriangleTypeDown;
+    [self stackViews:[NSArray arrayWithObjects:self.detailView, self.anchorView, nil]];
+}
+
+- (void)setupLayoutBelow {
+    self.anchorView.triangleType = TriangleTypeUp;
+    [self stackViews:[NSArray arrayWithObjects:self.anchorView, self.detailView, nil]];
 }
 
 #pragma mark - UITableViewDataSource delegate methods
@@ -118,7 +177,7 @@ static NSString *cellDequeueClassIdentifier = @"IndicatorDetailTableViewCell";
             indicator = [self.secondaryIndicators objectAtIndex:(indexPath.row - numPrimaryIndicators)];
         }
         
-        int index = [[indicator yValues] count] * self.percentAcrossScreen;
+        int index = [self currentPriceIndexForGraphObject:indicator];
         [customCell setupWithIndicator:indicator forPriceIndex:index];
     }
 }

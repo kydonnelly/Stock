@@ -8,13 +8,15 @@
 
 #import "XibView.h"
 
+#import "GraphData+Protocols.h"
 #import "IndicatorDatasource+Protocol.h"
 
 @interface PriceDetailView : XibView
 
-- (void)setupWithDatasource:(id<IndicatorDatasource>)datasource;
+- (void)setupWithDatasource:(id<IndicatorDatasource, GraphDatasource>)datasource;
 - (void)setPosition:(CGPoint)position inBounds:(CGRect)bounds;
 
+- (void)reset;
 - (void)refresh;
 
 @end

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,41 +14,80 @@
                 <rect key="frame" x="0.0" y="0.0" width="280" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLV-MQ-PcO" userLabel="Background button">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
+                    <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tjv-bP-FP2" userLabel="Centered View">
+                        <rect key="frame" x="20" y="0.0" width="240" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <state key="normal">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="handleSelection" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Knc-Au-R5u"/>
-                        </connections>
-                    </button>
-                    <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ticker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0g-Gm-ChM">
-                        <rect key="frame" x="68" y="0.0" width="112" height="43"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePe-8C-ZA8">
-                        <rect key="frame" x="180" y="0.0" width="80" height="43"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKk-gk-m3k" customClass="ExtendedStateButton">
-                        <rect key="frame" x="20" y="0.0" width="48" height="48"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="fave">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="favoriteButtonPressed" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Erd-1d-61Q"/>
-                        </connections>
-                    </button>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLV-MQ-PcO" userLabel="Background button">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="handleSelection" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Knc-Au-R5u"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKk-gk-m3k" userLabel="Button - favorite" customClass="ExtendedStateButton">
+                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="iKk-gk-m3k" secondAttribute="height" multiplier="1:1" id="qBD-jq-5dh"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="favoriteButtonPressed" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Erd-1d-61Q"/>
+                                </connections>
+                            </button>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ticker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0g-Gm-ChM">
+                                <rect key="frame" x="48" y="0.0" width="112" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="m0g-Gm-ChM" secondAttribute="height" multiplier="112:43" id="Ezn-UA-6ry"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePe-8C-ZA8">
+                                <rect key="frame" x="160" y="0.0" width="80" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ePe-8C-ZA8" secondAttribute="height" multiplier="80:43" id="Nhx-aK-WdR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="iKk-gk-m3k" secondAttribute="bottom" constant="-5" id="0HR-g7-MYi"/>
+                            <constraint firstAttribute="trailing" secondItem="NLV-MQ-PcO" secondAttribute="trailing" id="4nk-mD-Ba4"/>
+                            <constraint firstAttribute="bottom" secondItem="NLV-MQ-PcO" secondAttribute="bottom" id="9cI-Et-LTm"/>
+                            <constraint firstItem="ePe-8C-ZA8" firstAttribute="top" secondItem="Tjv-bP-FP2" secondAttribute="top" id="AYC-ju-moK"/>
+                            <constraint firstAttribute="bottom" secondItem="ePe-8C-ZA8" secondAttribute="bottom" id="Dma-WL-msS"/>
+                            <constraint firstAttribute="centerX" secondItem="NLV-MQ-PcO" secondAttribute="centerX" id="G5V-Tf-y4i"/>
+                            <constraint firstItem="iKk-gk-m3k" firstAttribute="leading" secondItem="Tjv-bP-FP2" secondAttribute="leading" id="Hax-Bt-HDS"/>
+                            <constraint firstAttribute="trailing" secondItem="ePe-8C-ZA8" secondAttribute="trailing" id="Hr3-jq-c7a"/>
+                            <constraint firstAttribute="bottom" secondItem="m0g-Gm-ChM" secondAttribute="bottom" id="IAB-nS-jvt"/>
+                            <constraint firstItem="NLV-MQ-PcO" firstAttribute="leading" secondItem="Tjv-bP-FP2" secondAttribute="leading" id="N2A-kT-cmA"/>
+                            <constraint firstItem="m0g-Gm-ChM" firstAttribute="top" secondItem="Tjv-bP-FP2" secondAttribute="top" id="N66-EB-3Uy"/>
+                            <constraint firstItem="iKk-gk-m3k" firstAttribute="top" secondItem="Tjv-bP-FP2" secondAttribute="top" id="WDY-Sr-qt4"/>
+                            <constraint firstItem="NLV-MQ-PcO" firstAttribute="top" secondItem="Tjv-bP-FP2" secondAttribute="top" id="Wol-4L-swN"/>
+                            <constraint firstAttribute="centerY" secondItem="NLV-MQ-PcO" secondAttribute="centerY" id="qz3-W5-tMf"/>
+                            <constraint firstItem="m0g-Gm-ChM" firstAttribute="leading" secondItem="iKk-gk-m3k" secondAttribute="trailing" id="ufN-hU-rad"/>
+                        </constraints>
+                    </view>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Tjv-bP-FP2" secondAttribute="bottom" id="Euw-SD-ZOr"/>
+                    <constraint firstAttribute="centerX" secondItem="Tjv-bP-FP2" secondAttribute="centerX" id="P78-Rc-aSn"/>
+                    <constraint firstAttribute="trailing" secondItem="Tjv-bP-FP2" secondAttribute="trailing" constant="20" id="U1j-ZA-UlI"/>
+                    <constraint firstItem="Tjv-bP-FP2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="on6-2J-G85"/>
+                    <constraint firstItem="Tjv-bP-FP2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="xjg-uU-IWR"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="favoriteButton" destination="iKk-gk-m3k" id="EXx-Fp-nbf"/>

@@ -21,7 +21,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    self.window.rootViewController = VC(MasterViewController);
+    [self.window setRootViewController:VC(MasterViewController)];
     [self.window makeKeyAndVisible];
     JumpToViewController(StockSelectionViewController);
     
@@ -48,6 +48,10 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 #pragma mark - Memory Warning

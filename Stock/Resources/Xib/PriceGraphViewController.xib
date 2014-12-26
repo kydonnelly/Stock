@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PriceGraphViewController">
@@ -18,54 +19,89 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="T6H-B0-a18" userLabel="Graph View" customClass="GraphView">
-                    <rect key="frame" x="0.0" y="68" width="320" height="460"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </view>
-                <view appearanceType="aqua" contentMode="scaleToFill" id="2fJ-vS-b2v" userLabel="View - Header">
-                    <rect key="frame" x="0.0" y="20" width="320" height="48"/>
+                <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0k-eX-efp" userLabel="Fixed View">
+                    <rect key="frame" x="0.0" y="20" width="320" height="508"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dTK-ab-QCB">
-                            <rect key="frame" x="50" y="9" width="204" height="30"/>
+                        <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fJ-vS-b2v" userLabel="View - Header">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hFv-e4-FAc" userLabel="Button - Back">
-                            <rect key="frame" x="20" y="9" width="46" height="30"/>
+                            <subviews>
+                                <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFv-e4-FAc" userLabel="Button - Back">
+                                    <rect key="frame" x="20" y="9" width="46" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="46" id="oDe-Fd-tVk"/>
+                                    </constraints>
+                                    <state key="normal" title="Back">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="backButtonPressed" destination="-1" eventType="touchUpInside" id="Zv2-8H-gja"/>
+                                    </connections>
+                                </button>
+                                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTK-ab-QCB">
+                                    <rect key="frame" x="58" y="9" width="204" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xoP-hl-ANY" userLabel="Button - Favorite" customClass="ExtendedStateButton">
+                                    <rect key="frame" x="254" y="0.0" width="48" height="48"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="xoP-hl-ANY" secondAttribute="height" multiplier="1:1" id="aey-zT-jI9"/>
+                                    </constraints>
+                                    <state key="normal">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="favoriteButtonPressed" destination="-1" eventType="touchUpInside" id="mCv-XC-GdD"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="5na-a1-dFX"/>
+                                <constraint firstItem="dTK-ab-QCB" firstAttribute="leading" secondItem="2fJ-vS-b2v" secondAttribute="leading" constant="58" id="6fT-3y-aAl"/>
+                                <constraint firstAttribute="bottom" secondItem="hFv-e4-FAc" secondAttribute="bottom" constant="9" id="9FT-Eb-sEg"/>
+                                <constraint firstAttribute="bottom" secondItem="xoP-hl-ANY" secondAttribute="bottom" id="IpT-gX-p51"/>
+                                <constraint firstItem="dTK-ab-QCB" firstAttribute="top" secondItem="2fJ-vS-b2v" secondAttribute="top" constant="9" id="JgK-QQ-9dI"/>
+                                <constraint firstItem="hFv-e4-FAc" firstAttribute="top" secondItem="2fJ-vS-b2v" secondAttribute="top" constant="9" id="Oof-v2-HvA"/>
+                                <constraint firstAttribute="centerX" secondItem="dTK-ab-QCB" secondAttribute="centerX" id="RgV-eI-vKj"/>
+                                <constraint firstAttribute="bottom" secondItem="dTK-ab-QCB" secondAttribute="bottom" constant="9" id="SSp-CO-xIg"/>
+                                <constraint firstItem="xoP-hl-ANY" firstAttribute="top" secondItem="2fJ-vS-b2v" secondAttribute="top" id="iUI-y1-zH2"/>
+                                <constraint firstAttribute="trailing" secondItem="xoP-hl-ANY" secondAttribute="trailing" constant="18" id="kfw-TS-bQf"/>
+                                <constraint firstItem="hFv-e4-FAc" firstAttribute="leading" secondItem="2fJ-vS-b2v" secondAttribute="leading" constant="20" id="xeA-lT-Puo"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T6H-B0-a18" userLabel="Graph View" customClass="GraphView">
+                            <rect key="frame" x="0.0" y="48" width="320" height="460"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Back">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="backButtonPressed" destination="-1" eventType="touchUpInside" id="Zv2-8H-gja"/>
-                            </connections>
-                        </button>
-                        <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xoP-hl-ANY" userLabel="Button - Favorite" customClass="ExtendedStateButton">
-                            <rect key="frame" x="254" y="0.0" width="48" height="48"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="fave">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="favoriteButtonPressed" destination="-1" eventType="touchUpInside" id="mCv-XC-GdD"/>
-                            </connections>
-                        </button>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="T6H-B0-a18" firstAttribute="leading" secondItem="N0k-eX-efp" secondAttribute="leading" id="0Jf-JL-05z"/>
+                        <constraint firstAttribute="bottom" secondItem="T6H-B0-a18" secondAttribute="bottom" id="OCp-uH-I81"/>
+                        <constraint firstAttribute="trailing" secondItem="2fJ-vS-b2v" secondAttribute="trailing" id="RZ7-Jj-TY5"/>
+                        <constraint firstItem="T6H-B0-a18" firstAttribute="top" secondItem="2fJ-vS-b2v" secondAttribute="bottom" id="bDv-xj-o4N"/>
+                        <constraint firstAttribute="trailing" secondItem="T6H-B0-a18" secondAttribute="trailing" id="gqr-n4-rUw"/>
+                        <constraint firstItem="2fJ-vS-b2v" firstAttribute="leading" secondItem="N0k-eX-efp" secondAttribute="leading" id="gtL-c4-uVX"/>
+                        <constraint firstItem="2fJ-vS-b2v" firstAttribute="top" secondItem="N0k-eX-efp" secondAttribute="top" id="krN-aT-6nY"/>
+                    </constraints>
                 </view>
-                <view appearanceType="aqua" contentMode="scaleToFill" id="y5f-eW-Ckl" userLabel="View - Footer" customClass="IndicatorListSliderView">
+                <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y5f-eW-Ckl" userLabel="View - Footer" customClass="IndicatorListSliderView">
                     <rect key="frame" x="0.0" y="408" width="320" height="160"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view appearanceType="aqua" contentMode="scaleToFill" id="IQf-At-MC3" userLabel="Always Visible View">
+                        <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQf-At-MC3" userLabel="Always Visible View">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="p03-GB-CEo" userLabel="Expand Button" customClass="ExtendedStateButton">
+                                <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p03-GB-CEo" userLabel="Expand Button" customClass="ExtendedStateButton">
                                     <rect key="frame" x="60" y="0.0" width="200" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Button">
@@ -77,12 +113,20 @@
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="p03-GB-CEo" firstAttribute="leading" secondItem="IQf-At-MC3" secondAttribute="leading" constant="60" id="Clf-wL-hUf"/>
+                                <constraint firstAttribute="trailing" secondItem="p03-GB-CEo" secondAttribute="trailing" constant="60" id="Hij-f5-B8F"/>
+                                <constraint firstAttribute="height" constant="40" id="OdI-1d-xEp"/>
+                                <constraint firstItem="p03-GB-CEo" firstAttribute="top" secondItem="IQf-At-MC3" secondAttribute="top" id="XTX-kc-tuy"/>
+                                <constraint firstAttribute="bottom" secondItem="p03-GB-CEo" secondAttribute="bottom" id="rzg-Hi-whm"/>
+                                <constraint firstAttribute="centerX" secondItem="p03-GB-CEo" secondAttribute="centerX" id="zDt-vg-ImS"/>
+                            </constraints>
                         </view>
-                        <view appearanceType="aqua" contentMode="scaleToFill" id="SM1-Vh-aJ0" userLabel="Collapsing View">
+                        <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SM1-Vh-aJ0" userLabel="Collapsing View">
                             <rect key="frame" x="0.0" y="40" width="320" height="120"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <tableView appearanceType="aqua" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6qT-0S-i1r">
+                                <tableView appearanceType="aqua" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6qT-0S-i1r">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -93,8 +137,24 @@
                                 </tableView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="6qT-0S-i1r" firstAttribute="leading" secondItem="SM1-Vh-aJ0" secondAttribute="leading" id="1l5-th-v5e"/>
+                                <constraint firstAttribute="trailing" secondItem="6qT-0S-i1r" secondAttribute="trailing" id="HEi-u3-Dc4"/>
+                                <constraint firstAttribute="bottom" secondItem="6qT-0S-i1r" secondAttribute="bottom" id="MuB-lN-NYK"/>
+                                <constraint firstItem="6qT-0S-i1r" firstAttribute="top" secondItem="SM1-Vh-aJ0" secondAttribute="top" id="tlE-Xc-g3k"/>
+                            </constraints>
                         </view>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="IQf-At-MC3" firstAttribute="top" secondItem="y5f-eW-Ckl" secondAttribute="top" id="0xo-JA-lS9"/>
+                        <constraint firstAttribute="trailing" secondItem="IQf-At-MC3" secondAttribute="trailing" id="GDI-5x-B6T"/>
+                        <constraint firstAttribute="trailing" secondItem="SM1-Vh-aJ0" secondAttribute="trailing" id="IsJ-AR-aMj"/>
+                        <constraint firstItem="SM1-Vh-aJ0" firstAttribute="top" secondItem="IQf-At-MC3" secondAttribute="bottom" id="akk-b2-D5f"/>
+                        <constraint firstItem="IQf-At-MC3" firstAttribute="leading" secondItem="y5f-eW-Ckl" secondAttribute="leading" id="eRb-gl-NT1"/>
+                        <constraint firstAttribute="width" secondItem="y5f-eW-Ckl" secondAttribute="height" multiplier="2:1" id="nen-Gh-u7T"/>
+                        <constraint firstItem="SM1-Vh-aJ0" firstAttribute="leading" secondItem="y5f-eW-Ckl" secondAttribute="leading" id="o7c-Lh-6Qn"/>
+                        <constraint firstAttribute="bottom" secondItem="SM1-Vh-aJ0" secondAttribute="bottom" id="saw-Rb-g5v"/>
+                    </constraints>
                     <connections>
                         <outlet property="alwaysVisibleView" destination="IQf-At-MC3" id="1x0-e5-Ptc"/>
                         <outlet property="collapsableView" destination="SM1-Vh-aJ0" id="Bhb-y4-fEH"/>
@@ -104,6 +164,15 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="N0k-eX-efp" secondAttribute="trailing" id="4jp-nu-Pne"/>
+                <constraint firstAttribute="trailing" secondItem="y5f-eW-Ckl" secondAttribute="trailing" id="8X2-xS-svp"/>
+                <constraint firstItem="N0k-eX-efp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NFA-qe-wOu"/>
+                <constraint firstAttribute="bottom" secondItem="y5f-eW-Ckl" secondAttribute="bottom" id="Ojk-6c-iWJ"/>
+                <constraint firstAttribute="bottom" secondItem="N0k-eX-efp" secondAttribute="bottom" constant="40" id="obX-8d-OIm"/>
+                <constraint firstItem="N0k-eX-efp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="ozT-XR-fYr"/>
+                <constraint firstItem="y5f-eW-Ckl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tas-QP-O36"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

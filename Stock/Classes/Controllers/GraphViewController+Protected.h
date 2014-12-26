@@ -30,6 +30,7 @@
 
 // extend
 
+- (void)refreshGraph;
 - (void)setupGestures;
 - (void)prepareGraphData:(NSArray *)sanitizedValues;
 

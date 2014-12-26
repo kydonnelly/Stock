@@ -13,6 +13,7 @@
 @property (nonatomic) BOOL expanded;
 
 - (void)setup;
+- (void)resetView;
 
 - (void)setExpanded:(BOOL)expanded animated:(BOOL)animated;
 

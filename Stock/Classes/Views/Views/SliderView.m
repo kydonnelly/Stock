@@ -40,12 +40,16 @@ static const double kSliderAnimationDuration = 0.5;
     [super dealloc];
 }
 
+- (void)resetView {
+    [self layoutSubviews];
+    [self setupReferenceFrames];
+    [self completeSetExpanded:NO animated:NO];
+}
+
 #pragma mark - Setup
 
 - (void)setup {
-    [self setupReferenceFrames];
     [self setupExpandButton];
-    [self completeSetExpanded:NO animated:NO];
 }
 
 - (void)setupReferenceFrames {

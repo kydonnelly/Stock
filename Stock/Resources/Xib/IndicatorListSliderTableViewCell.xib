@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,26 +14,72 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view appearanceType="aqua" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tgu-H1-nal" userLabel="Color View">
-                        <rect key="frame" x="5" y="16" width="10" height="10"/>
+                    <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LL7-11-ece" userLabel="Info View">
+                        <rect key="frame" x="5" y="0.0" width="250" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tgu-H1-nal" userLabel="Color View">
+                                <rect key="frame" x="0.0" y="17" width="10" height="10"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="tgu-H1-nal" secondAttribute="height" multiplier="1:1" id="gY5-Rz-zxb"/>
+                                </constraints>
+                            </view>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8aT-PW-uPN" userLabel="Name Label">
+                                <rect key="frame" x="15" y="0.0" width="230" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8aT-PW-uPN" firstAttribute="top" secondItem="LL7-11-ece" secondAttribute="top" id="T3C-YQ-2OM"/>
+                            <constraint firstAttribute="bottom" secondItem="tgu-H1-nal" secondAttribute="bottom" constant="16" id="VXx-X4-ZbM"/>
+                            <constraint firstAttribute="trailing" secondItem="8aT-PW-uPN" secondAttribute="trailing" constant="5" id="g73-6z-dzw"/>
+                            <constraint firstItem="tgu-H1-nal" firstAttribute="top" secondItem="LL7-11-ece" secondAttribute="top" constant="17" id="hYb-Ff-zku"/>
+                            <constraint firstAttribute="bottom" secondItem="8aT-PW-uPN" secondAttribute="bottom" id="iSy-5z-oPT"/>
+                            <constraint firstItem="tgu-H1-nal" firstAttribute="leading" secondItem="LL7-11-ece" secondAttribute="leading" id="pGt-kp-pbV"/>
+                            <constraint firstItem="8aT-PW-uPN" firstAttribute="leading" secondItem="tgu-H1-nal" secondAttribute="trailing" constant="5" id="u9H-oM-b9n"/>
+                            <constraint firstItem="8aT-PW-uPN" firstAttribute="leading" secondItem="tgu-H1-nal" secondAttribute="trailing" constant="5" id="xUt-O3-elh"/>
+                        </constraints>
                     </view>
-                    <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8aT-PW-uPN" userLabel="Name Label">
-                        <rect key="frame" x="20" y="0.0" width="230" height="43"/>
+                    <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pao-el-J4t" userLabel="Interactive View">
+                        <rect key="frame" x="255" y="0.0" width="65" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <switch appearanceType="aqua" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4dl-tt-3gt" userLabel="Active Switch">
-                        <rect key="frame" x="251" y="6" width="51" height="31"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <connections>
-                            <action selector="activeSwitchPressed" destination="KGk-i7-Jjw" eventType="valueChanged" id="3xi-98-qip"/>
-                        </connections>
-                    </switch>
+                        <subviews>
+                            <switch appearanceType="aqua" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4dl-tt-3gt" userLabel="Active Switch">
+                                <rect key="frame" x="0.0" y="6" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="activeSwitchPressed" destination="KGk-i7-Jjw" eventType="valueChanged" id="3xi-98-qip"/>
+                                </connections>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4dl-tt-3gt" firstAttribute="leading" secondItem="pao-el-J4t" secondAttribute="leading" id="DRC-eh-Em6"/>
+                            <constraint firstAttribute="bottom" secondItem="4dl-tt-3gt" secondAttribute="bottom" constant="6" id="NOe-fZ-tP6"/>
+                            <constraint firstAttribute="trailing" secondItem="4dl-tt-3gt" secondAttribute="trailing" constant="16" id="Nme-FP-j86"/>
+                            <constraint firstItem="4dl-tt-3gt" firstAttribute="top" secondItem="pao-el-J4t" secondAttribute="top" constant="6" id="Uk2-mh-zcd"/>
+                        </constraints>
+                    </view>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="pao-el-J4t" secondAttribute="trailing" id="0gj-wu-H5W"/>
+                    <constraint firstAttribute="trailing" secondItem="pao-el-J4t" secondAttribute="trailing" id="2J4-eo-3in"/>
+                    <constraint firstAttribute="bottom" secondItem="pao-el-J4t" secondAttribute="bottom" id="MXa-sI-P0h"/>
+                    <constraint firstItem="pao-el-J4t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="PaF-j7-99D"/>
+                    <constraint firstItem="pao-el-J4t" firstAttribute="leading" secondItem="LL7-11-ece" secondAttribute="trailing" id="RZh-Lo-R3e"/>
+                    <constraint firstItem="pao-el-J4t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="WeC-gr-L5D"/>
+                    <constraint firstItem="LL7-11-ece" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="dbo-7v-X2f"/>
+                    <constraint firstAttribute="bottom" secondItem="pao-el-J4t" secondAttribute="bottom" id="ibY-0u-1AH"/>
+                    <constraint firstAttribute="bottom" secondItem="LL7-11-ece" secondAttribute="bottom" id="ifA-p5-QsI"/>
+                    <constraint firstItem="pao-el-J4t" firstAttribute="leading" secondItem="LL7-11-ece" secondAttribute="trailing" id="sg8-OU-jdY"/>
+                    <constraint firstItem="LL7-11-ece" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="wLR-b0-jIJ"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="activeSwitch" destination="4dl-tt-3gt" id="24p-bH-2ST"/>

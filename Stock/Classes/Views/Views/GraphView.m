@@ -32,6 +32,10 @@ static const int kLabelTextSize = 12;
     [super dealloc];
 }
 
+- (void)resetView {
+    [self.superview layoutSubviews];
+}
+
 #pragma mark - Setup
 
 - (stepInfo)drawingInfoForStepInfo:(stepInfo)displayInfo

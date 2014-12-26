@@ -65,6 +65,15 @@ RegisterWithCallCenter
     [self refresh];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self.view layoutSubviews];
+    
+    [self.optionsSliderView resetView];
+    [self.graphView resetView];
+    [self refresh];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
@@ -145,15 +154,18 @@ RegisterWithCallCenter
 
 #pragma mark - Refresh
 
+- (void)refreshGraph {
+    [super refreshGraph];
+    [self.graphView addAxisAtY:self.lastClosePrice];
+}
+
 - (void)refresh {
     [super refresh];
-    
-    [self.graphView addAxisAtY:self.lastClosePrice];
-    [self.nameLabel setText:self.stock.ticker];
     
     [self refreshFavoriteButton];
     [self refreshOptionsSlider];
     [self refreshPriceDetailView];
+    [self.nameLabel setText:self.stock.ticker];
 }
 
 - (void)refreshFavoriteButton {
@@ -280,6 +292,14 @@ RegisterWithCallCenter
 - (IBAction)hideDetailView {
     self.priceDetailView.hidden = YES;
     [self.priceDetailView reset];
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 @end

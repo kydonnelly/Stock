@@ -15,6 +15,7 @@
 - (void)setDatasource:(id<GraphDatasource>)datasource;
 
 - (void)refresh;
+- (void)resetView;
 - (void)addAxisAtY:(float)axisY;
 
 @end

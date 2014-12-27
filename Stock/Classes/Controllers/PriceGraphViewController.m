@@ -27,6 +27,15 @@
 #import "StockPriceManager.h"
 #import "StockSelectionViewController.h"
 
+enum {
+    DisplayScaleDaysThreshold = 3,
+    DisplayScaleWeeksThreshold = 60,
+    DisplayScaleMonthsThreshold = 300,
+};
+
+static const int kHighDetailSpacing = 100;
+static const int kLowDetailSpacing = 80;
+
 @interface PriceGraphViewController () <IndicatorDatasource>
 
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
@@ -222,19 +231,27 @@ RegisterWithCallCenter
     int days = self.displayedEndTime - self.displayedStartTime;
     
     NSString *format = nil;
-    if (days <= 1) {
-        format = @"HH:mm";
-    } else if (days <= 3) {
-        format = @"dd-HH";
-    } else if (days <= 60) {
+    if (days <= DisplayScaleDaysThreshold) {
+        format = @"MM/dd HH:mm";
+    } else if (days <= DisplayScaleWeeksThreshold) {
         format = @"MM/dd";
-    } else if (days <= 300) {
-        format = @"MM";
+    } else if (days <= DisplayScaleMonthsThreshold) {
+        format = @"MM/dd/YY";
     } else {
         format = @"MM/YY";
     }
     
     return [self labelForX:x format:format];
+}
+
+- (int)horizontalSpacing {
+    int days = self.displayedEndTime - self.displayedStartTime;
+    
+    if (days <= DisplayScaleDaysThreshold) {
+        return kHighDetailSpacing;
+    } else {
+        return kLowDetailSpacing;
+    }
 }
 
 - (float)maxDomain {

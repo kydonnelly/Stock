@@ -13,7 +13,6 @@
 
 typedef struct {
     stepInfo stepInfo;
-    CGFloat buffer;
     int displayPrecision;
 } displayStepInfo;
 
@@ -23,10 +22,11 @@ static const int kMaxGraphPoints = 500;
 static const double kDefaultDomainShown = 1.0f;
 static const double kMinDomainShown = 1.f;
 
-static const int kVerticalSections = 5;
-static const int kHorizontalSections = 4;
+static const int kVerticalSpacing = 70;
+static const int kHorizontalSpacing = 90;
 static const CGFloat kMinVerticalBuffer = .05f;
-static const CGFloat kMaxVerticalBuffer = 0.33;
+static const CGFloat kStepRoundingFactor = 4.f;
+static const CGFloat kInvStepRoundingFactor = 0.25f;
 
 static const float kPanDampeningFactor = 0.01f;
 
@@ -259,16 +259,8 @@ static const float kPanDampeningFactor = 0.01f;
 - (displayStepInfo)stepForValuesFrom:(CGFloat)start
                                   to:(CGFloat)end
                             numSteps:(int)steps {
-    return [self stepForValuesFrom:start to:end numSteps:steps maxBuffer:1.f];
-}
-
-- (displayStepInfo)stepForValuesFrom:(CGFloat)start
-                                  to:(CGFloat)end
-                            numSteps:(int)steps
-                           maxBuffer:(float)bufferPercent {
     CGFloat range = end - start;
     CGFloat rawStep = range / steps;
-    CGFloat buffer = 0;
     
     float scale = 1;
     int displayPrecision = 0;
@@ -277,54 +269,52 @@ static const float kPanDampeningFactor = 0.01f;
         displayPrecision++;
     }
     while (rawStep * scale > 10.f) {
-        scale /= 10;
+        scale *= 0.1f;
     }
     
-    int scaledStep = rawStep * scale;
-    int remainder = range * scale - (scaledStep * (steps - 1));
-    
-    if (remainder > (range * scale * bufferPercent)) {
-        scaledStep = ceilf(rawStep * scale);
-        remainder = (rawStep * steps) - (scaledStep * (steps - 1));
-        buffer = ((scaledStep * steps) - range) / 2.f;
-    }
-    
-    if (remainder % 2) {
-        displayPrecision++;
-    }
+    CGFloat scaledStep = (int)(rawStep * scale * kStepRoundingFactor) * kInvStepRoundingFactor;
+    CGFloat remainder = range * scale - (scaledStep * (steps - 1));
     
     stepInfo stepInfo;
     stepInfo.step = scaledStep / scale;
     stepInfo.stepStart = start + (remainder / 2.f) / scale;
     stepInfo.numSteps = steps;
     
+    if (ABS(roundf(stepInfo.stepStart) - stepInfo.stepStart) > 0.05f) {
+        displayPrecision++;
+    } // else round down to trailing zero
+    
     displayStepInfo displayInfo;
     displayInfo.stepInfo = stepInfo;
     displayInfo.displayPrecision = displayPrecision;
-    displayInfo.buffer = buffer;
     
     return displayInfo;
 }
 
 - (void)refreshStepInfo {
+    CGSize graphSize = self.graphView.frame.size;
+    int xSteps = graphSize.width / [self horizontalSpacing];
+    int ySteps = graphSize.height / [self verticalSpacing];
+    
     self.domainInfo = [self stepForValuesFrom:self.displayedStartTime
                                            to:self.displayedEndTime
-                                     numSteps:kHorizontalSections];
+                                     numSteps:xSteps];
     
     self.rangeInfo = [self stepForValuesFrom:self.displayedMinY
                                           to:self.displayedMaxY
-                                    numSteps:kVerticalSections
-                                   maxBuffer:kMaxVerticalBuffer];
+                                    numSteps:ySteps];
     
-    // dynamic buffer
-    float dy = self.rangeInfo.buffer;
-    self.displayedMinY -= dy;
-    self.displayedMaxY += dy;
-    
-    // fixed buffer
     float buffer = (self.displayedMaxY - self.displayedMinY) * kMinVerticalBuffer;
     self.displayedMinY -= buffer;
     self.displayedMaxY += buffer;
+}
+
+- (int)verticalSpacing {
+    return kVerticalSpacing;
+}
+
+- (int)horizontalSpacing {
+    return kHorizontalSpacing;
 }
 
 @end

@@ -34,4 +34,7 @@
 - (void)setupGestures;
 - (void)prepareGraphData:(NSArray *)sanitizedValues;
 
+- (int)verticalSpacing;
+- (int)horizontalSpacing;
+
 @end

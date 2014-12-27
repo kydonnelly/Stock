@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -93,8 +94,13 @@
                         <constraint firstItem="2fJ-vS-b2v" firstAttribute="top" secondItem="N0k-eX-efp" secondAttribute="top" id="krN-aT-6nY"/>
                     </constraints>
                 </view>
+                <view hidden="YES" appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fIB-Pb-xFh" userLabel="Reference View">
+                    <rect key="frame" x="0.0" y="284" width="320" height="284"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
                 <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y5f-eW-Ckl" userLabel="View - Footer" customClass="IndicatorListSliderView">
-                    <rect key="frame" x="0.0" y="408" width="320" height="160"/>
+                    <rect key="frame" x="0.0" y="426" width="320" height="142"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQf-At-MC3" userLabel="Always Visible View">
@@ -123,11 +129,11 @@
                             </constraints>
                         </view>
                         <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SM1-Vh-aJ0" userLabel="Collapsing View">
-                            <rect key="frame" x="0.0" y="40" width="320" height="120"/>
+                            <rect key="frame" x="0.0" y="40" width="320" height="102"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <tableView appearanceType="aqua" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6qT-0S-i1r">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
@@ -151,7 +157,6 @@
                         <constraint firstAttribute="trailing" secondItem="SM1-Vh-aJ0" secondAttribute="trailing" id="IsJ-AR-aMj"/>
                         <constraint firstItem="SM1-Vh-aJ0" firstAttribute="top" secondItem="IQf-At-MC3" secondAttribute="bottom" id="akk-b2-D5f"/>
                         <constraint firstItem="IQf-At-MC3" firstAttribute="leading" secondItem="y5f-eW-Ckl" secondAttribute="leading" id="eRb-gl-NT1"/>
-                        <constraint firstAttribute="width" secondItem="y5f-eW-Ckl" secondAttribute="height" multiplier="2:1" id="nen-Gh-u7T"/>
                         <constraint firstItem="SM1-Vh-aJ0" firstAttribute="leading" secondItem="y5f-eW-Ckl" secondAttribute="leading" id="o7c-Lh-6Qn"/>
                         <constraint firstAttribute="bottom" secondItem="SM1-Vh-aJ0" secondAttribute="bottom" id="saw-Rb-g5v"/>
                     </constraints>
@@ -167,11 +172,16 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="N0k-eX-efp" secondAttribute="trailing" id="4jp-nu-Pne"/>
                 <constraint firstAttribute="trailing" secondItem="y5f-eW-Ckl" secondAttribute="trailing" id="8X2-xS-svp"/>
+                <constraint firstItem="y5f-eW-Ckl" firstAttribute="top" secondItem="fIB-Pb-xFh" secondAttribute="centerY" id="JFj-GE-eVY"/>
                 <constraint firstItem="N0k-eX-efp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NFA-qe-wOu"/>
                 <constraint firstAttribute="bottom" secondItem="y5f-eW-Ckl" secondAttribute="bottom" id="Ojk-6c-iWJ"/>
+                <constraint firstItem="fIB-Pb-xFh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="T7k-6H-RLd"/>
+                <constraint firstAttribute="trailing" secondItem="fIB-Pb-xFh" secondAttribute="trailing" id="iBo-fn-Gz3"/>
+                <constraint firstItem="fIB-Pb-xFh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="k7B-hO-Hcg"/>
                 <constraint firstAttribute="bottom" secondItem="N0k-eX-efp" secondAttribute="bottom" constant="40" id="obX-8d-OIm"/>
                 <constraint firstItem="N0k-eX-efp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="ozT-XR-fYr"/>
                 <constraint firstItem="y5f-eW-Ckl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tas-QP-O36"/>
+                <constraint firstAttribute="bottom" secondItem="fIB-Pb-xFh" secondAttribute="bottom" id="yMl-kx-7dJ"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
